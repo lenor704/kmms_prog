@@ -1,6 +1,5 @@
 #include <clocale>
 #include <iostream>
-#include <windows.h>
 
 #include "menu.hpp"
 #include "menu_functions.hpp"
