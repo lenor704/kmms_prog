@@ -1,5 +1,6 @@
 built_*/
 lib/
+.idea/
 
 *.exe
 *.ii

@@ -35,7 +35,7 @@ const ule::MenuItem ule::MATHAN_DIFFUR = {
 	"1 - Хочу изучить дифференциальное исчисление!", ule::mathan_diffur, &ule::STUDY_MATHAN
 };
 const ule::MenuItem ule::MATHAN_INTEGRAL = {
-	"2 - Хочу изучить интегральное исчисление!", ule::mathan_integral, &ule::STUDY_MATHAN
+	"2 - Хочу изучить интегральное исчисление!", ule::mat	han_integral, &ule::STUDY_MATHAN
 };
 
 namespace {
