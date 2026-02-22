@@ -1,6 +1,6 @@
-project(sort)
+project(long_number)
 
-set (LIBRARY bubble_sort_lib_56)
+set (LIBRARY long_number_lib)
 add_library(${LIBRARY} "")
 
 add_subdirectory(src)

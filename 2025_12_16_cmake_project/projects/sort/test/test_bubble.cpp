@@ -1,4 +1,4 @@
-#include "../../lib/googletest/googletest/include/gtest/gtest.h"
+#include <gtest/gtest.h>
 
 #include "bubble_sort.hpp"
 

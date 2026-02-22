@@ -17,4 +17,6 @@ cmake --build .
 
 copy ..\%SOURCE_FOLDER%\obuchaika\run_obuchaika.bat .\obuchaika
 copy ..\%SOURCE_FOLDER%\sort\src\run_bubble_sort.bat .\bubble_sort
+copy ..\%SOURCE_FOLDER%\sort\src\run_long_number.bat .\long_number
 copy ..\run_tests.bat .
+
