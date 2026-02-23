@@ -10,6 +10,7 @@ LongNumber::LongNumber() {
 }
 
 LongNumber::LongNumber(int length, int sign) : length(length), sign(sign) {
+	numbers = new int[length];
 	for (int i = 0; i < length; i++) {
 		numbers[i] = 0;
 	}
@@ -17,15 +18,14 @@ LongNumber::LongNumber(int length, int sign) : length(length), sign(sign) {
 
 LongNumber::LongNumber(const char* const str) {
 	int str_length = get_length(str);
+	sign = 1;
+	length = str_length;
 	int start = 0;
 	
 	if (str[0] == '-') {
 		sign = -1;
-		length = str_length - 1;
-		int start = 1;
-	} else {
-		sign = 1;
-		length = str_length;
+		length -= 1;
+		start += 1;
 	}
 	
 	numbers = new int[length];
@@ -57,22 +57,10 @@ LongNumber::~LongNumber() {
 }
 
 LongNumber& LongNumber::operator = (const char* const str) { // оператор присваивания
-	int str_length = get_length(str);
-	int start = 0;
-	if (str[0] == '-') {
-		sign = -1;
-		length = str_length - 1;
-		start = 1;
-	} else {
-		sign = 1;
-		length = str_length;
-	}
-	
 	delete[] numbers;
-	numbers = new int[length];
-	for (int i = 0; i < length; i++) {
-		numbers[i] = str[i + start];
-	}
+	this->sign = LongNumber(str).sign;
+	this->length = LongNumber(str).length;
+	this->numbers =LongNumber(str).numbers;
 	return *this;
 }
 
@@ -101,7 +89,7 @@ LongNumber& LongNumber::operator = (LongNumber&& x) { // оператор при
 }
 
 bool LongNumber::operator == (const LongNumber& x) const {
-	if (x.length != length or x.sign != x.sign) {
+	if (x.length != length or x.sign != sign) {
 		return false;
 	} else {
 		for (int i = 0; i < length; i++) {
@@ -136,14 +124,13 @@ bool LongNumber::operator > (const LongNumber& x) const {
 		if (length != x.length) {
 			return length < x.length;
 		} else {
-			for (int i = 0; i <= length; i++) {
+			for (int i = 0; i < length; i++) {
 				if (numbers[i] < x.numbers[i]) {
 					return true;
 				} else if (numbers[i] > x.numbers[i]) {
 					return false;
 				}
 			}
-			
 		}
 	}
 	return false;
@@ -158,6 +145,8 @@ bool LongNumber::operator < (const LongNumber& x) const {
 // PRIVATE
 // ----------------------------------------------------------
 int LongNumber::get_length(const char* const str) const noexcept {
+	if (!str) return 0;
+	
 	int length = 0;
 	while (str[length] != '\0') {
 		length++;

@@ -32,6 +32,7 @@ namespace ule {
 			//LongNumber operator * (const LongNumber& x) const;
 			//LongNumber operator / (const LongNumber& x) const;
 			//LongNumber operator % (const LongNumber& x) const;
+			//LongNumber operator * (const int& x) const;
 			
 			//bool is_negative() const noexcept;
 			
