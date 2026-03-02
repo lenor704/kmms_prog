@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <cmath>
 
 namespace ule {
 	class LongNumber {
@@ -29,11 +30,12 @@ namespace ule {
 			
 			LongNumber operator + (const LongNumber& x) const;
 			LongNumber operator - (const LongNumber& x) const;
-			//LongNumber operator * (const LongNumber& x) const;
+			LongNumber operator * (const LongNumber& x) const;
 			//LongNumber operator / (const LongNumber& x) const;
 			//LongNumber operator % (const LongNumber& x) const;
 			LongNumber operator * (const int& x) const;
 			LongNumber abs() const;
+			LongNumber zero();
 			
 			//bool is_negative() const noexcept;
 			

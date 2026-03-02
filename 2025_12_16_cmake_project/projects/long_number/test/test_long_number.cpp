@@ -239,9 +239,51 @@ TEST(multiply, integer_long_number) {
     <<"WRONG";
 }
 
+TEST (NumbersMul, Subtest_1) {
+  ule::LongNumber ln1 = "144";
+  ule::LongNumber ln2 = "37";
+  ule::LongNumber expected_1 = "5328";
+  ASSERT_EQ(expected_1, ln1 * ln2)
+    << "144*37";
+}
+TEST (NumbersMul, Subtest_2) {
+  ule::LongNumber ln1 = "33";
+  ule::LongNumber ln2 = "-571";
+  ule::LongNumber expected_1 = "-18843";
+  ASSERT_EQ(expected_1, ln1 * ln2)
+    << "33*(-571)";
+}
+TEST (NumbersMul, Subtest_3) {    
+  ule::LongNumber ln1 = "-3456";
+  ule::LongNumber ln2 = "-1";
+  ule::LongNumber expected_1 = "3456";
+  ASSERT_EQ(expected_1, ln1 * ln2)
+    << "-3456*(-1)";
+}
+TEST (NumbersMul, Subtest_4) {  
+  ule::LongNumber ln1 = "7645";
+  ule::LongNumber ln2 = "10";
+  ule::LongNumber expected_1 = "76450";
+  ASSERT_EQ(expected_1, ln1 * ln2)
+    << "7645*10";
+}
+TEST (NumbersMul, Subtest_5) {  
+  ule::LongNumber ln1 = "456";
+  ule::LongNumber ln2 = "0";
+  ule::LongNumber expected_1 = "0";
+  ASSERT_EQ(expected_1, ln1 * ln2)
+    << "456*(0)";
+}
+TEST (NumbersMul, Subtest_6) {  
+  ule::LongNumber ln1 = "999";
+  ule::LongNumber ln2 = "999";
+  ule::LongNumber expected_1 = "998001";
+  ASSERT_EQ(expected_1, ln1 * ln2)
+    << "999*999";
+}
+
 
 int main(int argc, char **argv) {
-	
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
 }

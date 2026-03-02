@@ -184,7 +184,8 @@ LongNumber LongNumber::operator + (const LongNumber& x) const {
 		i++;
 	}
 	
-	int zero = 0;
+	return sum.zero();
+	/*int zero = 0;
 	int j = 0;
 	while (sum.numbers[j] == 0 and j + 1 < sum.length) {
 		zero++;
@@ -201,11 +202,42 @@ LongNumber LongNumber::operator + (const LongNumber& x) const {
 			fin_sum.sign = 1;
 		}
 		return fin_sum;
-	}
+	}*/
 }
 
 LongNumber LongNumber::operator - (const LongNumber& x) const {
 	return *this + x * -1;
+}
+
+LongNumber LongNumber::operator * (const LongNumber& x) const {
+	if (x.length > length) {
+		return x * *this;
+	}
+	LongNumber result(length + x.length, sign * x.sign);
+	int prom = 0;
+	int ost = 0;
+	int ind;
+	for (int i = 1; i <= x.length; i++) {
+		ind = 0;
+		for (int j = 1; j <= length; j++) {
+			prom = numbers[length - j] * x.numbers[x.length - i] + ost; 
+			result.numbers[result.length - j - i + 1] += prom % 10;
+			if (result.numbers[result.length - j - i + 1] >= 10) {
+				result.numbers[result.length - j - i + 1] = result.numbers[result.length - j - i + 1] % 10;
+				prom += 10;
+			}
+			ost = prom / 10;
+			ind++;
+		}
+		while (ost != 0) {
+			prom = result.numbers[result.length - ind - i] + ost;
+			result.numbers[result.length - ind - i] += prom % 10;
+			ost = prom / 10;
+			ind++;
+		}
+		
+	}
+	return result.zero();
 }
 
 LongNumber LongNumber::operator * (const int& x) const {
@@ -221,6 +253,27 @@ LongNumber LongNumber::abs() const {
 		return *this * -1;
 	} else {
 		return *this;
+	}
+}
+
+LongNumber LongNumber::zero() {
+	int zeros = 0;
+	int j = 0;
+	while (numbers[j] == 0 and j + 1 < length) {
+		zeros++;
+		j++;
+	}
+	if (zeros == 0) {
+		return *this;
+	} else {
+		LongNumber fin(length - zeros, sign);
+		for (int i = 0; i < fin.length; i++) {
+			fin.numbers[i] = numbers[i + zeros];
+		}
+		if (fin.numbers[0] == 0) {
+			fin.sign = 1;
+		}
+		return fin;
 	}
 }
 
