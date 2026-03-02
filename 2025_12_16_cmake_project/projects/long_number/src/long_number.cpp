@@ -7,7 +7,6 @@ LongNumber::LongNumber() {
 	sign = 1;
 	numbers = new int[length];
 	numbers[0] = 0;
-	//std::cout << "конструктор 0" << std::endl;
 }
 
 LongNumber::LongNumber(int length, int sign) : length(length), sign(sign) {
@@ -15,7 +14,6 @@ LongNumber::LongNumber(int length, int sign) : length(length), sign(sign) {
 	for (int i = 0; i < length; i++) {
 		numbers[i] = 0;
 	}
-	//std::cout << "конструктор без значения" << std::endl;
 }
 
 LongNumber::LongNumber(const char* const str) {
@@ -43,7 +41,6 @@ LongNumber::LongNumber(const LongNumber& x) { // конструктор копи
 	for (int i = 0; i < length; i++) {
 		numbers[i] = x.numbers[i];
 	}
-	//std::cout << "кк" << std::endl;
 }
 
 LongNumber::LongNumber(LongNumber&& x) { // конструктор перемещения
@@ -51,11 +48,9 @@ LongNumber::LongNumber(LongNumber&& x) { // конструктор переме�
 	sign = x.sign;
 	numbers = x.numbers;
 	x.numbers = nullptr;
-	//std::cout << "кп" << std::endl;
 }
 
 LongNumber::~LongNumber() {
-	//std::cout << "~" << std::endl;
 	length = 0;
 	delete[] numbers;
 	numbers = nullptr;
@@ -66,7 +61,6 @@ LongNumber& LongNumber::operator = (const char* const str) { // оператор
 	this->sign = LongNumber(str).sign;
 	this->length = LongNumber(str).length;
 	this->numbers =LongNumber(str).numbers;
-	//std::cout << "=" << std::endl;
 	return *this;
 }
 
@@ -80,7 +74,6 @@ LongNumber& LongNumber::operator = (const LongNumber& x) { // оператор �
 			numbers[i] = x.numbers[i] - '0';
 		}
 	}
-	//std::cout << "Присвоение копирование" << std::endl;
 	return *this;
 }
 
@@ -92,7 +85,6 @@ LongNumber& LongNumber::operator = (LongNumber&& x) { // оператор при
 		numbers = x.numbers;
 		x.numbers = nullptr;
 	}
-	//std::cout << "присвоение перемещение" << std::endl;
 	return *this;
 }
 
@@ -185,24 +177,6 @@ LongNumber LongNumber::operator + (const LongNumber& x) const {
 	}
 	
 	return sum.zero();
-	/*int zero = 0;
-	int j = 0;
-	while (sum.numbers[j] == 0 and j + 1 < sum.length) {
-		zero++;
-		j++;
-	}
-	if (zero == 0) {
-		return sum;
-	} else {
-		LongNumber fin_sum(sum.length - zero, sum.sign);
-		for (int i = 0; i < fin_sum.length; i++) {
-			fin_sum.numbers[i] = sum.numbers[i + zero];
-		}
-		if (fin_sum.numbers[0] == 0) {
-			fin_sum.sign = 1;
-		}
-		return fin_sum;
-	}*/
 }
 
 LongNumber LongNumber::operator - (const LongNumber& x) const {
@@ -235,7 +209,6 @@ LongNumber LongNumber::operator * (const LongNumber& x) const {
 			ost = prom / 10;
 			ind++;
 		}
-		
 	}
 	return result.zero();
 }
@@ -248,6 +221,9 @@ LongNumber LongNumber::operator * (const int& x) const {
 	return result;
 }
 
+// ----------------------------------------------------------
+// PRIVATE
+// ----------------------------------------------------------
 LongNumber LongNumber::abs() const {
 	if (sign == -1) {
 		return *this * -1;
@@ -277,10 +253,6 @@ LongNumber LongNumber::zero() {
 	}
 }
 
-
-// ----------------------------------------------------------
-// PRIVATE
-// ----------------------------------------------------------
 int LongNumber::get_length(const char* const str) const noexcept {
 	if (!str) return 0;
 	
@@ -288,7 +260,6 @@ int LongNumber::get_length(const char* const str) const noexcept {
 	while (str[length] != '\0') {
 		length++;
 	}
-	//std::cout << length << std::endl;
 	return length;
 }
 

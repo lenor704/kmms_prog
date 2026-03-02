@@ -34,8 +34,7 @@ namespace ule {
 			//LongNumber operator / (const LongNumber& x) const;
 			//LongNumber operator % (const LongNumber& x) const;
 			LongNumber operator * (const int& x) const;
-			LongNumber abs() const;
-			LongNumber zero();
+
 			
 			//bool is_negative() const noexcept;
 			
@@ -43,5 +42,7 @@ namespace ule {
 			
 		private:
 			int get_length(const char* const str) const noexcept;
+			LongNumber abs() const;
+			LongNumber zero();
 	};
 }
