@@ -27,12 +27,13 @@ namespace ule {
 			bool operator > (const LongNumber& x) const;
 			bool operator < (const LongNumber& x) const;
 			
-			//LongNumber operator + (const LongNumber& x) const;
-			//LongNumber operator - (const LongNumber& x) const;
+			LongNumber operator + (const LongNumber& x) const;
+			LongNumber operator - (const LongNumber& x) const;
 			//LongNumber operator * (const LongNumber& x) const;
 			//LongNumber operator / (const LongNumber& x) const;
 			//LongNumber operator % (const LongNumber& x) const;
-			//LongNumber operator * (const int& x) const;
+			LongNumber operator * (const int& x) const;
+			LongNumber abs() const;
 			
 			//bool is_negative() const noexcept;
 			
