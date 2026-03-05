@@ -232,13 +232,6 @@ TEST (NumbersSub, Subtest_6) {
     << "456-456";
 }
 
-TEST(multiply, integer_long_number) {
-  ule::LongNumber ln1 = "123";
-  ule::LongNumber expected_1 = "-123";
-  ASSERT_EQ(expected_1, ln1 * -1)
-    <<"WRONG";
-}
-
 TEST (NumbersMul, Subtest_1) {
   ule::LongNumber ln1 = "144";
   ule::LongNumber ln2 = "37";
@@ -282,6 +275,55 @@ TEST (NumbersMul, Subtest_6) {
     << "999*999";
 }
 
+TEST (NumbersDiv, Subtest_1) {  
+  ule::LongNumber ln1 = "137";
+  ule::LongNumber ln2 = "-7";
+  ule::LongNumber expected_1 = "-19";
+  ASSERT_EQ(expected_1, ln1 / ln2)
+    << "137 / 7";
+}
+TEST (NumbersDiv, Subtest_2) {  
+  ule::LongNumber ln1 = "1234";
+  ule::LongNumber ln2 = "1";
+  ule::LongNumber expected_1 = "1234";
+  ASSERT_EQ(expected_1, ln1 / ln2)
+    << "1234 / 1";
+}
+TEST (NumbersDiv, Subtest_3) {  
+  ule::LongNumber ln1 = "12";
+  ule::LongNumber ln2 = "123";
+  ule::LongNumber expected_1 = "0";
+  ASSERT_EQ(expected_1, ln1 / ln2)
+    << "12 / 123";
+}
+TEST (NumbersDiv, Subtest_4) {  
+  ule::LongNumber ln1 = "-18720";
+  ule::LongNumber ln2 = "165";
+  ule::LongNumber expected_1 = "-113";
+  ASSERT_EQ(expected_1, ln1 / ln2)
+    << "18720 / 165";
+}
+TEST (NumbersDiv, Subtest_5) {  
+  ule::LongNumber ln1 = "0";
+  ule::LongNumber ln2 = "123";
+  ule::LongNumber expected_1 = "0";
+  ASSERT_EQ(expected_1, ln1 / ln2)
+    << "0 / 123";
+}
+TEST (NumbersDiv, Subtest_6) {  
+  ule::LongNumber ln1 = "1256";
+  ule::LongNumber ln2 = "6";
+  ule::LongNumber expected_1 = "209";
+  ASSERT_EQ(expected_1, ln1 / ln2)
+    << "1256 / 6";
+}
+TEST (NumbersDiv, Subtest_7) {  
+  ule::LongNumber ln1 = "-1256";
+  ule::LongNumber ln2 = "0";
+  ule::LongNumber expected_1 = "0";
+  ASSERT_EQ(expected_1, ln1 / ln2)
+    << "-1256 / 0";
+}
 
 int main(int argc, char **argv) {
 	::testing::InitGoogleTest(&argc, argv);
