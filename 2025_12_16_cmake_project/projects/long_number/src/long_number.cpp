@@ -57,10 +57,22 @@ LongNumber::~LongNumber() {
 }
 
 LongNumber& LongNumber::operator = (const char* const str) { // оператор присваивания
+	int str_length = get_length(str);
+	sign = 1;
+	length = str_length;
+	int start = 0;
+	
+	if (str[0] == '-') {
+		sign = -1;
+		length -= 1;
+		start += 1;
+	}
 	delete[] numbers;
-	this->sign = LongNumber(str).sign;
-	this->length = LongNumber(str).length;
-	this->numbers =LongNumber(str).numbers;
+	numbers = new int[length];
+	for (int i = 0; i < length; i++) {
+		numbers[i] = str[i + start] - '0';
+	}
+	
 	return *this;
 }
 
@@ -239,6 +251,18 @@ LongNumber LongNumber::operator / (const LongNumber& x) const {
 		prom *= 10;
 	}
 	return result.zero();
+}
+
+LongNumber LongNumber::operator % (const LongNumber& x) const {
+	LongNumber otv = *this - (*this / x) * x;
+	if (otv.sign == -1) {
+		return x + otv;
+	}
+	return otv;
+}
+
+bool LongNumber::is_negative() const noexcept {
+	return sign == -1;
 }
 
 LongNumber LongNumber::abs() const {

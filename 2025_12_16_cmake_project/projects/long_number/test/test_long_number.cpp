@@ -318,11 +318,33 @@ TEST (NumbersDiv, Subtest_6) {
     << "1256 / 6";
 }
 TEST (NumbersDiv, Subtest_7) {  
-  ule::LongNumber ln1 = "-1256";
-  ule::LongNumber ln2 = "0";
-  ule::LongNumber expected_1 = "0";
+  ule::LongNumber ln1 = "-123";
+  ule::LongNumber ln2 = "10";
+  ule::LongNumber expected_1 = "-12";
   ASSERT_EQ(expected_1, ln1 / ln2)
-    << "-1256 / 0";
+    << "-123 / 10";
+}
+
+TEST (NumbersOst, Subtest_1) {  
+  ule::LongNumber ln1 = "-123";
+  ule::LongNumber ln2 = "10";
+  ule::LongNumber expected_1 = "7";
+  ASSERT_EQ(expected_1, ln1 % ln2)
+    << "-123 % 10";
+}
+TEST (NumbersOst, Subtest_2) {  
+  ule::LongNumber ln1 = "123";
+  ule::LongNumber ln2 = "-10";
+  ule::LongNumber expected_1 = "3";
+  ASSERT_EQ(expected_1, ln1 % ln2)
+    << "123 % -10";
+}
+TEST (NumbersOst, Subtest_3) {  
+  ule::LongNumber ln1 = "120";
+  ule::LongNumber ln2 = "4";
+  ule::LongNumber expected_1 = "0";
+  ASSERT_EQ(expected_1, ln1 % ln2)
+    << "120 % 4";
 }
 
 int main(int argc, char **argv) {

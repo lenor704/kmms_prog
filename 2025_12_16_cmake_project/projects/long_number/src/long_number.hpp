@@ -31,11 +31,11 @@ namespace ule {
 			LongNumber operator - (const LongNumber& x) const;
 			LongNumber operator * (const LongNumber& x) const;
 			LongNumber operator / (const LongNumber& x) const;
-			//LongNumber operator % (const LongNumber& x) const;
+			LongNumber operator % (const LongNumber& x) const;
 			LongNumber abs() const;
 
 			
-			//bool is_negative() const noexcept;
+			bool is_negative() const noexcept;
 			
 			friend std::ostream& operator << (std::ostream &os, const LongNumber& x);
 			
