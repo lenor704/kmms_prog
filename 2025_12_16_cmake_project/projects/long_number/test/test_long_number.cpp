@@ -274,6 +274,13 @@ TEST (NumbersMul, Subtest_6) {
   ASSERT_EQ(expected_1, ln1 * ln2)
     << "999*999";
 }
+TEST (NumbersMul, Subtest_7) {  
+  ule::LongNumber ln1 = "9986748359";
+  ule::LongNumber ln2 = "99857584867599";
+  ule::LongNumber expected_1 = "997252571810197545520041";
+  ASSERT_EQ(expected_1, ln1 * ln2)
+    << "много*много";
+}
 
 TEST (NumbersDiv, Subtest_1) {  
   ule::LongNumber ln1 = "137";
@@ -323,6 +330,13 @@ TEST (NumbersDiv, Subtest_7) {
   ule::LongNumber expected_1 = "-12";
   ASSERT_EQ(expected_1, ln1 / ln2)
     << "-123 / 10";
+}
+TEST (NumbersDiv, Subtest_8) {  
+  ule::LongNumber ln1 = "99857584867599";
+  ule::LongNumber ln2 = "7674849";
+  ule::LongNumber expected_1 = "13011016";
+  ASSERT_EQ(expected_1, ln1 / ln2)
+    << "много/много";
 }
 
 TEST (NumbersOst, Subtest_1) {  

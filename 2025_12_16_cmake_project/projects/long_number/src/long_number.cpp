@@ -227,28 +227,20 @@ LongNumber LongNumber::operator * (const LongNumber& x) const {
 
 LongNumber LongNumber::operator / (const LongNumber& x) const {
 	LongNumber result(length, sign * x.sign);
-	int delitel = 0;
-	for (int i = 0; i < x.length; i++) {
-		delitel += x.numbers[i];
-		if (i + 1 != x.length) {
-			delitel *= 10;
-		}
-	}
-	if (delitel == 0) {
-		return result.zero();
-	}
+	LongNumber delitel = x.abs();
 	
-	int prom = 0;
+	LongNumber prom = "0";
 	int otv = 0;
 	for (int i = 0; i < length; i++) {
-		prom += numbers[i];
-		while (prom >= delitel) {
+		char a[2] = {char(numbers[i] + '0'), '\0'};
+		prom = prom + LongNumber(a);
+		while (prom > delitel - LongNumber("1")) {
 			otv++;
-			prom -= delitel;
+			prom = prom - delitel;
 		}
 		result.numbers[i] = otv;
 		otv = 0;
-		prom *= 10;
+		prom = prom * LongNumber("10");
 	}
 	return result.zero();
 }
