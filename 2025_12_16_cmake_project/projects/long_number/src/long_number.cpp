@@ -168,7 +168,6 @@ LongNumber LongNumber::operator + (const LongNumber& x) const {
 		} else {
 			prom = ost;
 		}
-        
 		if (prom < 0) {
 			ost = 1;
 			sum.numbers[sum.length - i] = 10 + prom;
@@ -188,11 +187,13 @@ LongNumber LongNumber::operator + (const LongNumber& x) const {
 		i++;
 	}
 	
-	return sum.zero();
+	return sum.zero(); 
 }
 
 LongNumber LongNumber::operator - (const LongNumber& x) const {
-	return *this + x * -1;
+	LongNumber temp = x;
+	temp.sign = temp.sign * -1;
+	return *this + temp;
 }
 
 LongNumber LongNumber::operator * (const LongNumber& x) const {
@@ -210,7 +211,7 @@ LongNumber LongNumber::operator * (const LongNumber& x) const {
 			result.numbers[result.length - j - i + 1] += prom % 10;
 			if (result.numbers[result.length - j - i + 1] >= 10) {
 				result.numbers[result.length - j - i + 1] = result.numbers[result.length - j - i + 1] % 10;
-				prom += 10;
+				prom += 10; 
 			}
 			ost = prom / 10;
 			ind++;
@@ -234,6 +235,7 @@ LongNumber LongNumber::operator / (const LongNumber& x) const {
 	for (int i = 0; i < length; i++) {
 		char a[2] = {char(numbers[i] + '0'), '\0'};
 		prom = prom + LongNumber(a);
+		
 		while (prom > delitel - LongNumber("1")) {
 			otv++;
 			prom = prom - delitel;
@@ -241,6 +243,9 @@ LongNumber LongNumber::operator / (const LongNumber& x) const {
 		result.numbers[i] = otv;
 		otv = 0;
 		prom = prom * LongNumber("10");
+	}
+	if (result * x > *this) {
+		result = result + LongNumber("1") * result.sign;
 	}
 	return result.zero();
 }
