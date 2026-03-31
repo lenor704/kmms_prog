@@ -6,6 +6,7 @@ enable_testing()
 add_subdirectory(lib/googletest)
 
 add_subdirectory(sort)
+add_subdirectory(containers)
 add_subdirectory(obuchaika)
 add_subdirectory(long_number)
 
