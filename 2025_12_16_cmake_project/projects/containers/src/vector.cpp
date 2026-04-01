@@ -46,7 +46,7 @@ bool Vector<T>::insert(const std::size_t position, const T& value) {
 	size++;
 	if (capacity <= size) {
 		capacity *= 2;
-		add_capacity(capacity); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		add_capacity(capacity);
 		
 	}
 	
@@ -60,14 +60,13 @@ bool Vector<T>::insert(const std::size_t position, const T& value) {
 
 template<typename T>
 void Vector<T>::print() const noexcept {
-	for (int i = 0; i < size; i++) {
+	for (std::size_t i = 0; i < size; i++) {
 		std::cout << arr[i];
 		if (i + 1 < size) {
 			std::cout << ", ";
 		}
 	}
-	std::cout << std::endl;
-	
+	std::cout << std::endl;	
 }
 
 template<typename T>
@@ -75,7 +74,7 @@ void Vector<T>::push_back(const T& value) {
 	size++;
 	if (capacity <= size) {
 		capacity *= 2;
-		add_capacity(capacity);	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		add_capacity(capacity);
 	}
 	
 	arr[size - 1] = value;
@@ -84,7 +83,7 @@ void Vector<T>::push_back(const T& value) {
 template<typename T>
 bool Vector<T>::remove_first(const T& value) {
 	bool flag = true;
-	for (int i = 0; i < size; i++) {
+	for (std::size_t i = 0; i < size; i++) {
 		if (arr[i] == value) {
 			for (int j = i; j < size; j++) {
 				arr[j] = arr[j + 1];
@@ -99,7 +98,7 @@ bool Vector<T>::remove_first(const T& value) {
 template<typename T>
 void Vector<T>::add_capacity(const std::size_t new_capacity) {
 	T* new_arr = new T[new_capacity];
-	for (int i = 0; i < size; i++) {
+	for (std::size_t i = 0; i < size; i++) {
 		new_arr[i] = arr[i];
 	}
 	delete[] arr;
