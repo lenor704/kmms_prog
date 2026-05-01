@@ -12,7 +12,8 @@ namespace ule {
 			std::size_t capacity = START_CAPACITY;
 			std::size_t size = 0;
 			
-			void add_capacity(const std::size_t new_capacity);
+			void change_capacity(const std::size_t new_capacity);
+			void add_capacity_insert(const std::size_t new_capacity, const std::size_t position, const T& value);
 
 		public:
 			Vector();

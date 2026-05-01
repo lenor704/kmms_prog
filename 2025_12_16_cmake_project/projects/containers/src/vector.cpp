@@ -42,19 +42,28 @@ bool Vector<T>::insert(const std::size_t position, const T& value) {
 	if (position > size) {
 		return false;
 	}
-	
 	size++;
 	if (capacity <= size) {
-		capacity *= 2;
-		add_capacity(capacity);
+		capacity *= 2;		
+		T* new_arr = new T[capacity];
 		
+		for (std::size_t i = size; i > position; i--) {
+			new_arr[i] = arr[i - 1];
+		}
+		new_arr[position] = value;
+		for (std::size_t i = 0; i < position; i++) {
+			new_arr[i] = arr[i];
+		}
+		
+		delete[] arr;
+		arr = new_arr;	
+		return true;		
 	}
 	
-	for (std::size_t i = size - 1; i > position; i--) {
+	for (std::size_t i = size; i > position; i--) {
 		arr[i] = arr[i - 1];
-	}	
+	}
 	arr[position] = value;
-	
 	return true;
 }
 
@@ -74,7 +83,7 @@ void Vector<T>::push_back(const T& value) {
 	size++;
 	if (capacity <= size) {
 		capacity *= 2;
-		add_capacity(capacity);
+		change_capacity(capacity);
 	}
 	
 	arr[size - 1] = value;
@@ -89,6 +98,10 @@ bool Vector<T>::remove_first(const T& value) {
 				arr[j] = arr[j + 1];
 			}
 			size --;
+			if (capacity > size * 2) {
+				capacity /= 2;
+				change_capacity(capacity);
+			}
 			return true;
 		}
 	}
@@ -96,7 +109,7 @@ bool Vector<T>::remove_first(const T& value) {
 }
 
 template<typename T>
-void Vector<T>::add_capacity(const std::size_t new_capacity) {
+void Vector<T>::change_capacity(const std::size_t new_capacity) {
 	T* new_arr = new T[new_capacity];
 	for (std::size_t i = 0; i < size; i++) {
 		new_arr[i] = arr[i];
@@ -104,4 +117,9 @@ void Vector<T>::add_capacity(const std::size_t new_capacity) {
 	delete[] arr;
 	arr = new_arr;
 	capacity = new_capacity;
+}
+
+template<typename T>
+void Vector<T>::add_capacity_insert(const std::size_t new_capacity, const std::size_t position, const T& value) {
+
 }
