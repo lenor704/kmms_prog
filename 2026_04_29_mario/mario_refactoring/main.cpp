@@ -1,10 +1,7 @@
 #include "mario.hpp"
 
 
-int maxLvl;
-
-
-void ule::CreateLevel(int lvl, ule::TObject *mario, ule::TObject *&brick, int &brickLength, ule::TObject *&moving, int &movingLength, int& score) {
+void ule::CreateLevel(int lvl, ule::TObject *mario, ule::TObject *&brick, int &brickLength, ule::TObject *&moving, int &movingLength, int& score, int& maxLvl) {
 	system("color 9F");
 	
 	brickLength = 0;
@@ -135,7 +132,7 @@ void ule::HorizonMoveMap(float dx, ule::TObject mario, ule::TObject *&brick, int
 	
 }
 
-void ule::HorizonMoveObject (ule::TObject *obj, ule::TObject *mario, ule::TObject *&brick, int &brickLength, ule::TObject *&moving, int &movingLength, int &level, int& score) {
+void ule::HorizonMoveObject (ule::TObject *obj, ule::TObject *mario, ule::TObject *&brick, int &brickLength, ule::TObject *&moving, int &movingLength, int &level, int& score, int& maxLvl) {
 	obj[0].x += obj[0].horizSpeed;
 	
 	for (int i = 0; i < brickLength; i++) {
@@ -148,7 +145,7 @@ void ule::HorizonMoveObject (ule::TObject *obj, ule::TObject *mario, ule::TObjec
 	
 	if (obj[0].cType == 'o') {
 		ule::TObject tmp = *obj;
-		VertMoveObject(&tmp, mario, brick, brickLength, moving, movingLength, level, score);
+		VertMoveObject(&tmp, mario, brick, brickLength, moving, movingLength, level, score, maxLvl);
 		if (tmp.IsFly == true) {
 			obj[0].x -= obj[0].horizSpeed;
 			obj[0].horizSpeed = -obj[0].horizSpeed;
@@ -174,7 +171,7 @@ bool ule::IsPosInMap(int x, int y) {
 	return ((x >= 0) && (x < mapWidth) && (y >= 0) && (y < mapHeight));
 }
 
-void ule::MarioCollision(ule::TObject mario, ule::TObject *&brick, int &brickLength, ule::TObject *&moving, int &movingLength, int &level, int& score) {
+void ule::MarioCollision(ule::TObject mario, ule::TObject *&brick, int &brickLength, ule::TObject *&moving, int &movingLength, int &level, int& score, int& maxLvl) {
 	for (int i = 0; i < movingLength; i++) {
 		if (IsCollision(mario, moving[i])) {
 			if (moving[i].cType == 'o') {
@@ -188,7 +185,7 @@ void ule::MarioCollision(ule::TObject mario, ule::TObject *&brick, int &brickLen
 					i--;
 					continue;					
 				} else {
-					PlayerDead(mario, brick, brickLength, moving, movingLength, level, score);
+					PlayerDead(mario, brick, brickLength, moving, movingLength, level, score, maxLvl);
 				}
 			}
 			if (moving[i].cType == '$') {
@@ -202,10 +199,10 @@ void ule::MarioCollision(ule::TObject mario, ule::TObject *&brick, int &brickLen
 	}
 }
 
-void ule::PlayerDead(ule::TObject &mario, ule::TObject *&brick, int &brickLength, ule::TObject *&moving, int &movingLength, int &level, int& score) {
+void ule::PlayerDead(ule::TObject &mario, ule::TObject *&brick, int &brickLength, ule::TObject *&moving, int &movingLength, int &level, int& score, int& maxLvl) {
 	system("color 4F");
 	Sleep(500);
-	CreateLevel(level, &mario, brick, brickLength, moving, movingLength, score);
+	CreateLevel(level, &mario, brick, brickLength, moving, movingLength, score, maxLvl);
 }
 
 void ule::PutObjectOnMap(ule::TObject obj, char (&map)[mapHeight][mapWidth + 1]) {
@@ -251,7 +248,7 @@ void ule::ShowMap(char (&map)[mapHeight][mapWidth + 1]) {
 	}
 }
 
-void ule::VertMoveObject(ule::TObject *obj, ule::TObject *mario, ule::TObject *&brick, int &brickLength, ule::TObject *&moving, int &movingLength, int &level, int& score) {
+void ule::VertMoveObject(ule::TObject *obj, ule::TObject *mario, ule::TObject *&brick, int &brickLength, ule::TObject *&moving, int &movingLength, int &level, int& score, int& maxLvl) {
 	obj->IsFly = true;
 	obj->vertSpeed += 0.05;
 	SetObjectPos(obj, obj->x, obj->y + obj->vertSpeed);
@@ -278,7 +275,7 @@ void ule::VertMoveObject(ule::TObject *obj, ule::TObject *mario, ule::TObject *&
 				
 				system("color 2F");
 				Sleep(500);
-				CreateLevel(level, mario, brick, brickLength, moving, movingLength, score);
+				CreateLevel(level, mario, brick, brickLength, moving, movingLength, score, maxLvl);
 			}
 			break;
 		}
@@ -297,8 +294,9 @@ int main() {
 	
 	int level = 1;
 	int score;
+	int maxLvl;
 	
-	ule::CreateLevel(level, &mario, brick, brickLength, moving, movingLength, score);
+	ule::CreateLevel(level, &mario, brick, brickLength, moving, movingLength, score, maxLvl);
 	do {
 		ule::ClearMap(map);
 		
@@ -313,18 +311,18 @@ int main() {
 		}
 		
 		if (mario.y > mapHeight) {
-			ule::PlayerDead(mario, brick, brickLength, moving, movingLength, level, score);
+			ule::PlayerDead(mario, brick, brickLength, moving, movingLength, level, score, maxLvl);
 		}
 		
-		ule::VertMoveObject(&mario, &mario, brick, brickLength, moving, movingLength, level, score);
-		ule::MarioCollision(mario, brick, brickLength, moving, movingLength, level, score);
+		ule::VertMoveObject(&mario, &mario, brick, brickLength, moving, movingLength, level, score, maxLvl);
+		ule::MarioCollision(mario, brick, brickLength, moving, movingLength, level, score, maxLvl);
 		
 		for (int i = 0; i < brickLength; i++) {
 			ule::PutObjectOnMap(brick[i], map);
 		}
 		for (int i = 0; i < movingLength; i++) {
-			ule::VertMoveObject(moving + i, &mario, brick, brickLength, moving, movingLength, level, score);
-			ule::HorizonMoveObject(moving + i, &mario, brick, brickLength, moving, movingLength, level, score);
+			ule::VertMoveObject(moving + i, &mario, brick, brickLength, moving, movingLength, level, score, maxLvl);
+			ule::HorizonMoveObject(moving + i, &mario, brick, brickLength, moving, movingLength, level, score, maxLvl);
 			if (moving[i].y > mapHeight) {
 				ule::DeleteMoving(i, moving, movingLength);
 				i--;
