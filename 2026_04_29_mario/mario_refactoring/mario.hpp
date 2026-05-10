@@ -20,22 +20,22 @@ namespace ule {
 	} TObject;
 	
 	void CreateLevel(int lvl);
-	void ClearMap();
+	void ClearMap(char (&map)[mapHeight][mapWidth + 1]);
 	void DeleteMoving(int i);
 	TObject *GetNewBrick();
 	TObject *GetNewMoving();
 	void HorizonMoveMap(float dx);
-	void HorizonMoveObject (TObject *obj);
+	void HorizonMoveObject (TObject *obj);	
 	void InitObject(TObject *obj, float xPos, float yPos, float oWidth, float oHeight, char inType);
 	bool IsCollision(TObject o1, TObject o2);
 	bool IsPosInMap(int x, int y);
 	void MarioCollision();
 	void PlayerDead();
-	void PutObjectOnMap(TObject obj);
-	void PutScoreOnMap();
+	void PutObjectOnMap(TObject obj, char (&map)[mapHeight][mapWidth + 1]);
+	void PutScoreOnMap(char (&map)[mapHeight][mapWidth + 1] );
 	void setCur(int x, int y);
 	void SetObjectPos(TObject *obj, float xPos, float yPos);
-	void ShowMap();
+	void ShowMap(char (&map)[mapHeight][mapWidth + 1]);
 	void VertMoveObject(TObject *obj);
 }
 
