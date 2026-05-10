@@ -1,10 +1,13 @@
 #pragma once
 
+#include <cmath>
 #include <stdio.h>
-#include <stdlib.h>
-
-#include <math.h>
+#include <cstdlib>
+#include <iostream>
 #include <windows.h>
+
+#define mapHeight 25
+#define mapWidth 80
 
 namespace ule {
 	typedef struct SObject {
@@ -16,23 +19,23 @@ namespace ule {
 		float horizSpeed;
 	} TObject;
 	
+	void CreateLevel(int lvl);
 	void ClearMap();
-	void ShowMap();
-	void SetObjectPos(TObject *obj, float xPos, float yPos);
-	void InitObject(TObject *obj, float xPos, float yPos, float oWidth, float oHeight, char inType);
+	void DeleteMoving(int i);
 	TObject *GetNewBrick();
 	TObject *GetNewMoving();
-	void PlayerDead();
-	void VertMoveObject(TObject *obj);
-	void DeleteMoving(int i);
-	void MarioCollision();
-	void HorizonMoveObject (TObject *obj);
-	bool IsPosInMap(int x, int y);
-	void PutObjectOnMap(TObject obj);
-	void setCur(int x, int y);
 	void HorizonMoveMap(float dx);
+	void HorizonMoveObject (TObject *obj);
+	void InitObject(TObject *obj, float xPos, float yPos, float oWidth, float oHeight, char inType);
 	bool IsCollision(TObject o1, TObject o2);
+	bool IsPosInMap(int x, int y);
+	void MarioCollision();
+	void PlayerDead();
+	void PutObjectOnMap(TObject obj);
 	void PutScoreOnMap();
-	void CreateLevel(int lvl);
+	void setCur(int x, int y);
+	void SetObjectPos(TObject *obj, float xPos, float yPos);
+	void ShowMap();
+	void VertMoveObject(TObject *obj);
 }
 

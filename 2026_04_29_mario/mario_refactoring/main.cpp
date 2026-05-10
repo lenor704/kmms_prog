@@ -1,16 +1,12 @@
 #include "mario.hpp"
 
-#define mapWidth 80
-#define mapHeight 25
-
-
 char map[mapHeight][mapWidth + 1];
 ule::TObject mario;
 
-ule::TObject *brick = NULL;
+ule::TObject *brick = nullptr;
 int brickLength;
 
-ule::TObject *moving = NULL;
+ule::TObject *moving = nullptr;
 int movingLength;
 
 int level = 1;
@@ -30,22 +26,22 @@ void ule::ClearMap() {
 void ule::ShowMap() {
 	map[mapHeight - 1][mapWidth - 1] = '\0';
 	for (int j = 0; j < mapHeight; j++) {
-		printf("%s", map[j]);
+		std::cout << map[j];
 	}
 }
 
 void ule::SetObjectPos(ule::TObject *obj, float xPos, float yPos) {
-	(*obj).x = xPos;
-	(*obj).y = yPos;
+	obj->x = xPos;
+	obj->y = yPos;
 }
 
 void ule::InitObject(ule::TObject *obj, float xPos, float yPos, float oWidth, float oHeight, char inType) {
 	SetObjectPos(obj, xPos, yPos);
-	(*obj).width = oWidth;
-	(*obj).height = oHeight;
-	(*obj).vertSpeed = 0;
-	(*obj).cType = inType;
-	(*obj).horizSpeed = 0.2;
+	obj->width = oWidth;
+	obj->height = oHeight;
+	obj->vertSpeed = 0;
+	obj->cType = inType;
+	obj->horizSpeed = 0.2;
 }
 
 void ule::PlayerDead() {
@@ -55,9 +51,9 @@ void ule::PlayerDead() {
 }
 
 void ule::VertMoveObject(ule::TObject *obj) {
-	(*obj).IsFly = true;
-	(*obj).vertSpeed += 0.05;
-	SetObjectPos(obj, (*obj).x, (*obj).y + (*obj).vertSpeed);
+	obj->IsFly = true;
+	obj->vertSpeed += 0.05;
+	SetObjectPos(obj, obj->x, obj->y + obj->vertSpeed);
 	
 	for (int i = 0; i < brickLength; i++) {
 		if (IsCollision(*obj, brick[i])) {
@@ -70,8 +66,8 @@ void ule::VertMoveObject(ule::TObject *obj) {
 				InitObject(GetNewMoving(), brick[i].x, brick[i].y - 3, 3, 2, '$');
 				moving[movingLength - 1].vertSpeed = -0.7;
 			}
-			(*obj).y -= (*obj).vertSpeed;
-			(*obj).vertSpeed = 0;
+			obj->y -= obj->vertSpeed;
+			obj->vertSpeed = 0;
 			
 			if (brick[i].cType == '+') {
 				level++;
@@ -92,7 +88,13 @@ void ule::VertMoveObject(ule::TObject *obj) {
 void ule::DeleteMoving(int i) {
 	movingLength--;
 	moving[i] = moving[movingLength];
-	moving = (ule::TObject*)realloc(moving, sizeof(*moving) * movingLength);
+	
+	TObject* newMoving = new TObject[movingLength];
+	for (int i = 0; i < movingLength; i++) {
+		newMoving[i] = moving[i];
+	}
+	delete[] moving;
+	moving = newMoving;
 }
 
 void ule::MarioCollision() {
@@ -152,10 +154,10 @@ bool ule::IsPosInMap(int x, int y) {
 }
 
 void ule::PutObjectOnMap(ule::TObject obj) {
-	int ix = (int)round(obj.x);
-	int iy = (int)round(obj.y);
-	int iWidth = (int)round(obj.width);
-	int iHeight = (int)round(obj.height);
+	int ix = round(obj.x);
+	int iy = round(obj.y);
+	int iWidth = round(obj.width);
+	int iHeight = round(obj.height);
 	
 	for (int i = ix; i < (ix + iWidth); i++) {
 		for (int j = iy; j < (iy + iHeight); j++) {
@@ -199,14 +201,26 @@ bool ule::IsCollision(ule::TObject o1, ule::TObject o2) {
 
 ule::TObject *ule::GetNewBrick() {
 	brickLength++;
-	brick = (ule::TObject*)realloc(brick, sizeof(*brick) * brickLength);
-	return brick + brickLength - 1;
+	
+	TObject* newBrick = new TObject[brickLength];
+	for (int i = 0; i < brickLength - 1; i++) {
+		newBrick[i] = brick[i];
+	}
+	delete[] brick;
+	brick = newBrick;
+	return &brick[brickLength - 1];
 }
 
 ule::TObject *ule::GetNewMoving() {
 	movingLength++;
-	moving = (ule::TObject*)realloc(moving, sizeof(*moving) * movingLength);
-	return moving + movingLength - 1;
+	
+	TObject* newMoving = new TObject[movingLength];
+	for (int i = 0; i < movingLength - 1; i++) {
+		newMoving[i] = moving[i];
+	}
+	delete[] moving;
+	moving = newMoving;
+	return &moving[movingLength - 1];
 }
 
 void ule::PutScoreOnMap() {
@@ -222,9 +236,12 @@ void ule::CreateLevel(int lvl) {
 	system("color 9F");
 	
 	brickLength = 0;
-	brick = (ule::TObject*)realloc(brick, 0);
+	delete[] brick;
+	brick = nullptr;
+	
 	movingLength = 0;
-	moving = (ule::TObject*)realloc(moving, 0);
+	delete[] moving;
+	moving = nullptr;
 	
 	ule::InitObject(&mario, 39, 10, 3, 3, '@');
 	score = 0;
