@@ -19,23 +19,23 @@ namespace ule {
 		float horizSpeed;
 	} TObject;
 	
-	void CreateLevel(int lvl, TObject *mario);
+	void CreateLevel(int lvl, TObject *mario, TObject *&brick); //!
 	void ClearMap(char (&map)[mapHeight][mapWidth + 1]);
 	void DeleteMoving(int i);
-	TObject *GetNewBrick();
+	TObject *GetNewBrick(TObject *&brick); //!
 	TObject *GetNewMoving();
-	void HorizonMoveMap(float dx, TObject mario);
-	void HorizonMoveObject (TObject *obj, TObject *mario);
+	void HorizonMoveMap(float dx, TObject mario, TObject *&brick); //!
+	void HorizonMoveObject (TObject *obj, TObject *mario, TObject *&brick); //!
 	void InitObject(TObject *obj, float xPos, float yPos, float oWidth, float oHeight, char inType);
 	bool IsCollision(TObject o1, TObject o2);
 	bool IsPosInMap(int x, int y);
-	void MarioCollision(TObject mario);
-	void PlayerDead(TObject mario);
+	void MarioCollision(TObject mario, TObject *&brick); // !!!
+	void PlayerDead(TObject &mario, TObject *&brick); //!!!
 	void PutObjectOnMap(TObject obj, char (&map)[mapHeight][mapWidth + 1]);
-	void PutScoreOnMap(char (&map)[mapHeight][mapWidth + 1] );
+	void PutScoreOnMap(char (&map)[mapHeight][mapWidth + 1]);
 	void setCur(int x, int y);
 	void SetObjectPos(TObject *obj, float xPos, float yPos);
 	void ShowMap(char (&map)[mapHeight][mapWidth + 1]);
-	void VertMoveObject(TObject *obj, TObject *mario);
+	void VertMoveObject(TObject *obj, TObject *mario, TObject *&brick); //!
 }
 
