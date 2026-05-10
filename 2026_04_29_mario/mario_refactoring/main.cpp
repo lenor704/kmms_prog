@@ -1,10 +1,5 @@
 #include "mario.hpp"
 
-
-
-
-int brickLength;
-
 ule::TObject *moving = nullptr;
 int movingLength;
 
@@ -13,7 +8,7 @@ int score;
 int maxLvl;
 
 
-void ule::CreateLevel(int lvl, ule::TObject *mario, ule::TObject *&brick) {
+void ule::CreateLevel(int lvl, ule::TObject *mario, ule::TObject *&brick, int &brickLength) {
 	system("color 9F");
 	
 	brickLength = 0;
@@ -28,30 +23,30 @@ void ule::CreateLevel(int lvl, ule::TObject *mario, ule::TObject *&brick) {
 	score = 0;
 	
 	if (lvl == 1) {
-		ule::InitObject(ule::GetNewBrick(brick), 20, 20, 40, 5, '#');
-			ule::InitObject(ule::GetNewBrick(brick), 30, 10, 5, 3, '?');
-			ule::InitObject(ule::GetNewBrick(brick), 50, 10, 5, 3, '?');
-		ule::InitObject(ule::GetNewBrick(brick), 60, 15, 40, 10, '#');
-			ule::InitObject(ule::GetNewBrick(brick), 60, 5, 10, 3, '-');
-			ule::InitObject(ule::GetNewBrick(brick), 70, 5, 5, 3, '?');
-			ule::InitObject(ule::GetNewBrick(brick), 75, 5, 5, 3, '-');
-			ule::InitObject(ule::GetNewBrick(brick), 80, 5, 5, 3, '?');
-			ule::InitObject(ule::GetNewBrick(brick), 85, 5, 10, 3, '-');
-		ule::InitObject(ule::GetNewBrick(brick), 100, 20, 20, 5, '#');
-		ule::InitObject(ule::GetNewBrick(brick), 120, 15, 10, 10, '#');
-		ule::InitObject(ule::GetNewBrick(brick), 150, 20, 40, 5, '#');
-		ule::InitObject(ule::GetNewBrick(brick), 210, 15, 10, 10, '+');
+		ule::InitObject(ule::GetNewBrick(brick, brickLength), 20, 20, 40, 5, '#');
+			ule::InitObject(ule::GetNewBrick(brick, brickLength), 30, 10, 5, 3, '?');
+			ule::InitObject(ule::GetNewBrick(brick, brickLength), 50, 10, 5, 3, '?');
+		ule::InitObject(ule::GetNewBrick(brick, brickLength), 60, 15, 40, 10, '#');
+			ule::InitObject(ule::GetNewBrick(brick, brickLength), 60, 5, 10, 3, '-');
+			ule::InitObject(ule::GetNewBrick(brick, brickLength), 70, 5, 5, 3, '?');
+			ule::InitObject(ule::GetNewBrick(brick, brickLength), 75, 5, 5, 3, '-');
+			ule::InitObject(ule::GetNewBrick(brick, brickLength), 80, 5, 5, 3, '?');
+			ule::InitObject(ule::GetNewBrick(brick, brickLength), 85, 5, 10, 3, '-');
+		ule::InitObject(ule::GetNewBrick(brick, brickLength), 100, 20, 20, 5, '#');
+		ule::InitObject(ule::GetNewBrick(brick, brickLength), 120, 15, 10, 10, '#');
+		ule::InitObject(ule::GetNewBrick(brick, brickLength), 150, 20, 40, 5, '#');
+		ule::InitObject(ule::GetNewBrick(brick, brickLength), 210, 15, 10, 10, '+');
 		
 		ule::InitObject(ule::GetNewMoving(), 25, 10, 3, 2, 'o');
 		ule::InitObject(ule::GetNewMoving(), 80, 10, 3, 2, 'o');
 	}
 	if (lvl == 2) {
-		ule::InitObject(ule::GetNewBrick(brick), 20, 20, 40, 5, '#');
-		ule::InitObject(ule::GetNewBrick(brick), 60, 15, 10, 10, '#');
-		ule::InitObject(ule::GetNewBrick(brick), 80, 20, 20, 5, '#');
-		ule::InitObject(ule::GetNewBrick(brick), 120, 15, 10, 10, '#');
-		ule::InitObject(ule::GetNewBrick(brick), 150, 20, 40, 5, '#');
-		ule::InitObject(ule::GetNewBrick(brick), 210, 15, 10, 10, '+');
+		ule::InitObject(ule::GetNewBrick(brick, brickLength), 20, 20, 40, 5, '#');
+		ule::InitObject(ule::GetNewBrick(brick, brickLength), 60, 15, 10, 10, '#');
+		ule::InitObject(ule::GetNewBrick(brick, brickLength), 80, 20, 20, 5, '#');
+		ule::InitObject(ule::GetNewBrick(brick, brickLength), 120, 15, 10, 10, '#');
+		ule::InitObject(ule::GetNewBrick(brick, brickLength), 150, 20, 40, 5, '#');
+		ule::InitObject(ule::GetNewBrick(brick, brickLength), 210, 15, 10, 10, '+');
 
 		ule::InitObject(ule::GetNewMoving(), 25, 10, 3, 2, 'o');
 		ule::InitObject(ule::GetNewMoving(), 80, 10, 3, 2, 'o');
@@ -61,10 +56,10 @@ void ule::CreateLevel(int lvl, ule::TObject *mario, ule::TObject *&brick) {
 		ule::InitObject(ule::GetNewMoving(), 175, 10, 3, 2, 'o');
 	}
 	if (lvl == 3) {
-		ule::InitObject(ule::GetNewBrick(brick), 20, 20, 40, 5, '#');
-		ule::InitObject(ule::GetNewBrick(brick), 80, 20, 15, 5, '#');
-		ule::InitObject(ule::GetNewBrick(brick), 120, 15, 15, 10, '#');
-		ule::InitObject(ule::GetNewBrick(brick), 160, 10, 15, 15, '+');
+		ule::InitObject(ule::GetNewBrick(brick, brickLength), 20, 20, 40, 5, '#');
+		ule::InitObject(ule::GetNewBrick(brick, brickLength), 80, 20, 15, 5, '#');
+		ule::InitObject(ule::GetNewBrick(brick, brickLength), 120, 15, 15, 10, '#');
+		ule::InitObject(ule::GetNewBrick(brick, brickLength), 160, 10, 15, 15, '+');
 
 		ule::InitObject(ule::GetNewMoving(), 25, 10, 3, 2, 'o');
 		ule::InitObject(ule::GetNewMoving(), 50, 10, 3, 2, 'o');
@@ -100,7 +95,7 @@ void ule::DeleteMoving(int i) {
 	moving = newMoving;
 }
 
-ule::TObject *ule::GetNewBrick(ule::TObject *&brick) {
+ule::TObject *ule::GetNewBrick(ule::TObject *&brick, int &brickLength) {
 	brickLength++;
 	
 	TObject* newBrick = new TObject[brickLength];
@@ -125,7 +120,7 @@ ule::TObject *ule::GetNewMoving() {
 }
 
 
-void ule::HorizonMoveMap(float dx, ule::TObject mario, ule::TObject *&brick) {
+void ule::HorizonMoveMap(float dx, ule::TObject mario, ule::TObject *&brick, int &brickLength) {
 	mario.x -=dx;
 	for (int i = 0; i < brickLength; i++) {
 		if (IsCollision(mario, brick[i])) {
@@ -144,7 +139,7 @@ void ule::HorizonMoveMap(float dx, ule::TObject mario, ule::TObject *&brick) {
 	
 }
 
-void ule::HorizonMoveObject (ule::TObject *obj, ule::TObject *mario, ule::TObject *&brick) {
+void ule::HorizonMoveObject (ule::TObject *obj, ule::TObject *mario, ule::TObject *&brick, int &brickLength) {
 	obj[0].x += obj[0].horizSpeed;
 	
 	for (int i = 0; i < brickLength; i++) {
@@ -157,7 +152,7 @@ void ule::HorizonMoveObject (ule::TObject *obj, ule::TObject *mario, ule::TObjec
 	
 	if (obj[0].cType == 'o') {
 		ule::TObject tmp = *obj;
-		VertMoveObject(&tmp, mario, brick);
+		VertMoveObject(&tmp, mario, brick, brickLength);
 		if (tmp.IsFly == true) {
 			obj[0].x -= obj[0].horizSpeed;
 			obj[0].horizSpeed = -obj[0].horizSpeed;
@@ -183,7 +178,7 @@ bool ule::IsPosInMap(int x, int y) {
 	return ((x >= 0) && (x < mapWidth) && (y >= 0) && (y < mapHeight));
 }
 
-void ule::MarioCollision(ule::TObject mario, ule::TObject *&brick) {
+void ule::MarioCollision(ule::TObject mario, ule::TObject *&brick, int &brickLength) {
 	for (int i = 0; i < movingLength; i++) {
 		if (IsCollision(mario, moving[i])) {
 			if (moving[i].cType == 'o') {
@@ -197,7 +192,7 @@ void ule::MarioCollision(ule::TObject mario, ule::TObject *&brick) {
 					i--;
 					continue;					
 				} else {
-					PlayerDead(mario, brick);
+					PlayerDead(mario, brick, brickLength);
 				}
 			}
 			if (moving[i].cType == '$') {
@@ -211,10 +206,10 @@ void ule::MarioCollision(ule::TObject mario, ule::TObject *&brick) {
 	}
 }
 
-void ule::PlayerDead(ule::TObject &mario, ule::TObject *&brick) {
+void ule::PlayerDead(ule::TObject &mario, ule::TObject *&brick, int &brickLength) {
 	system("color 4F");
 	Sleep(500);
-	CreateLevel(level, &mario, brick);
+	CreateLevel(level, &mario, brick, brickLength);
 }
 
 void ule::PutObjectOnMap(ule::TObject obj, char (&map)[mapHeight][mapWidth + 1]) {
@@ -260,7 +255,7 @@ void ule::ShowMap(char (&map)[mapHeight][mapWidth + 1]) {
 	}
 }
 
-void ule::VertMoveObject(ule::TObject *obj, ule::TObject *mario, ule::TObject *&brick) {
+void ule::VertMoveObject(ule::TObject *obj, ule::TObject *mario, ule::TObject *&brick, int &brickLength) {
 	obj->IsFly = true;
 	obj->vertSpeed += 0.05;
 	SetObjectPos(obj, obj->x, obj->y + obj->vertSpeed);
@@ -287,7 +282,7 @@ void ule::VertMoveObject(ule::TObject *obj, ule::TObject *mario, ule::TObject *&
 				
 				system("color 2F");
 				Sleep(500);
-				CreateLevel(level, mario, brick);
+				CreateLevel(level, mario, brick, brickLength);
 			}
 			break;
 		}
@@ -299,8 +294,9 @@ int main() {
 	char map[mapHeight][mapWidth + 1];
 	ule::TObject mario;
 	ule::TObject *brick = nullptr;
+	int brickLength;
 	
-	ule::CreateLevel(level, &mario, brick);
+	ule::CreateLevel(level, &mario, brick, brickLength);
 	do {
 		ule::ClearMap(map);
 		
@@ -308,25 +304,25 @@ int main() {
 			mario.vertSpeed = -1;
 		}
 		if (GetKeyState('A') < 0) {
-			ule::HorizonMoveMap(1, mario, brick);
+			ule::HorizonMoveMap(1, mario, brick, brickLength);
 		}
 		if (GetKeyState('D') < 0) {
-			ule::HorizonMoveMap(-1, mario, brick);
+			ule::HorizonMoveMap(-1, mario, brick, brickLength);
 		}
 		
 		if (mario.y > mapHeight) {
-			ule::PlayerDead(mario, brick);
+			ule::PlayerDead(mario, brick, brickLength);
 		}
 		
-		ule::VertMoveObject(&mario, &mario, brick);
-		ule::MarioCollision(mario, brick);
+		ule::VertMoveObject(&mario, &mario, brick, brickLength);
+		ule::MarioCollision(mario, brick, brickLength);
 		
 		for (int i = 0; i < brickLength; i++) {
 			ule::PutObjectOnMap(brick[i], map);
 		}
 		for (int i = 0; i < movingLength; i++) {
-			ule::VertMoveObject(moving + i, &mario, brick);
-			ule::HorizonMoveObject(moving + i, &mario, brick);
+			ule::VertMoveObject(moving + i, &mario, brick, brickLength);
+			ule::HorizonMoveObject(moving + i, &mario, brick, brickLength);
 			if (moving[i].y > mapHeight) {
 				ule::DeleteMoving(i);
 				i--;
