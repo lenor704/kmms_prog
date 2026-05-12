@@ -1,4 +1,4 @@
-#include "mario.hpp"
+#include "mario_func.hpp"
 
 int main() {
 	char map[mapHeight][mapWidth + 1];
@@ -13,45 +13,45 @@ int main() {
 	int score;
 	int maxLvl;
 	
-	ule::CreateLevel(level, &mario, brick, brickLength, moving, movingLength, score, maxLvl);
+	ule::createLevel(level, &mario, brick, brickLength, moving, movingLength, score, maxLvl);
 	do {
-		ule::ClearMap(map);
+		ule::clearMap(map);
 		
-		if ((mario.IsFly == false) && (GetKeyState(VK_SPACE) < 0)) {
+		if ((mario.isFly == false) && (GetKeyState(VK_SPACE) < 0)) {
 			mario.vertSpeed = -1;
 		}
 		if (GetKeyState('A') < 0) {
-			ule::HorizonMoveMap(1, mario, brick, brickLength, moving, movingLength);
+			ule::horizonMoveMap(1, mario, brick, brickLength, moving, movingLength);
 		}
 		if (GetKeyState('D') < 0) {
-			ule::HorizonMoveMap(-1, mario, brick, brickLength, moving, movingLength);
+			ule::horizonMoveMap(-1, mario, brick, brickLength, moving, movingLength);
 		}
 		
 		if (mario.y > mapHeight) {
-			ule::PlayerDead(mario, brick, brickLength, moving, movingLength, level, score, maxLvl);
+			ule::playerDead(mario, brick, brickLength, moving, movingLength, level, score, maxLvl);
 		}
 		
-		ule::VertMoveObject(&mario, &mario, brick, brickLength, moving, movingLength, level, score, maxLvl);
-		ule::MarioCollision(mario, brick, brickLength, moving, movingLength, level, score, maxLvl);
+		ule::vertMoveObject(&mario, &mario, brick, brickLength, moving, movingLength, level, score, maxLvl);
+		ule::marioCollision(mario, brick, brickLength, moving, movingLength, level, score, maxLvl);
 		
 		for (int i = 0; i < brickLength; i++) {
-			ule::PutObjectOnMap(brick[i], map);
+			ule::putObjectOnMap(brick[i], map);
 		}
 		for (int i = 0; i < movingLength; i++) {
-			ule::VertMoveObject(moving + i, &mario, brick, brickLength, moving, movingLength, level, score, maxLvl);
-			ule::HorizonMoveObject(moving + i, &mario, brick, brickLength, moving, movingLength, level, score, maxLvl);
+			ule::vertMoveObject(moving + i, &mario, brick, brickLength, moving, movingLength, level, score, maxLvl);
+			ule::horizonMoveObject(moving + i, &mario, brick, brickLength, moving, movingLength, level, score, maxLvl);
 			if (moving[i].y > mapHeight) {
-				ule::DeleteMoving(i, moving, movingLength);
+				ule::deleteMoving(i, moving, movingLength);
 				i--;
 				continue;					
 			}
-			ule::PutObjectOnMap(moving[i], map);
+			ule::putObjectOnMap(moving[i], map);
 		}
-		ule::PutObjectOnMap(mario, map);
-		ule::PutScoreOnMap(map, score);
+		ule::putObjectOnMap(mario, map);
+		ule::putScoreOnMap(map, score);
 		
 		ule::setCur(0, 0);
-		ule::ShowMap(map);
+		ule::showMap(map);
 		
 		Sleep(10);
 	} while (GetKeyState(VK_ESCAPE) >= 0);
