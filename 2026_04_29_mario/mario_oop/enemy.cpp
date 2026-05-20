@@ -16,11 +16,8 @@ void Enemy::spawn(float xPos, float yPos) {
 	y = yPos;
 }
 
-void Enemy::horizonMovement(Level& level) {
+void Enemy::horizonMovement(Brick* bricks, int brickCount) {
 	x += horizSpeed;
-	
-	Brick* brick = level.getBrick();
-	int brickCount = level.getBrickCount();
 	
 	for (int i = 0; i < brickCount; i++) {
 		if (isCollision(brick[i]) {
@@ -38,13 +35,10 @@ void Enemy::horizonMovement(Level& level) {
 	}
 }
 
-void Enemy::vertMovement(Level& level) {
+void Enemy::vertMovement(Brick* bricks, int brickCount) {
 	isFly = true;
 	vertSpeed += 0.05;
 	setPosition(x, y + vertSpeed);
-	
-	Brick* brick = level.getBrick();
-	int brickCount = level.getBrickCount();
 	
 	for (int i = 0; i < brickCount; i++) {
 		if (isCollision(brick[i])) {

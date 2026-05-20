@@ -12,8 +12,8 @@ namespace ule {
 			
 			void spawn(float xPos, float yPos);
 			
-			void horizonMovement(Level& level);
-			void vertMovement(Level& level);
+			void horizonMovement(Brick* bricks, int brickCount);
+			void vertMovement(Brick* bricks, int brickCount);
 			
 			void update() override;
 	};
