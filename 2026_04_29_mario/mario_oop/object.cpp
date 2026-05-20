@@ -2,25 +2,52 @@
 
 using ule::Object;
 
-Object::Object(float width, float height, float vertSpeed, float horixSpeed, char type) 
-			  : width(width), height(height), vertSpeed(vertSpeed), horixSpeed(horixSpeed), type(type) 
-			  {
+Object::Object() {
+	x = 0;
+	y = 0;
+	width = 0;
+	height = 0;
+	vertSpeed = 0;
+	horizSpeed = 0;
+	isFly = true;
+	type = ' ';
+	
 }
 
 float Object::x() {
 	return x;
 }
 
+void Object::setX(float newX) {
+	x = newX;
+}
+
 float Object::y() {
 	return y;
+}
+
+void Object::setY(float newY) {
+	y = newY;
 }
 
 float Object::getHeight() {
 	return height;
 }
 
+void Object::setHeight(float newHeight) {
+	height = newHeight;
+}
+
 float Object::getWidth() {
 	return width;
+}
+
+void Object::setWidth(float newWidth) {
+	width = newWidth;
+}
+
+char Object::getType() {
+	return type;
 }
 
 void Object::setPositon(float x, float y) : x(x), y(y) {
