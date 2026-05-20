@@ -14,6 +14,15 @@ Object::Object() {
 	
 }
 
+void Object::init(float x, float y, float width, float height, char type)
+	: x(x),
+	y(y),
+	width(width),
+	height(height),
+	type(type)
+{	
+}
+
 float Object::x() {
 	return x;
 }

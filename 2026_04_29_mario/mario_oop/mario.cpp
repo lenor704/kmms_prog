@@ -14,15 +14,23 @@ Mario::Mario() : Object() {
 	isFly = true;
 }
 
-void Mario::jump() {
-	vertSpeed = -1;
+void Mario::spawn() {
+	x = 39;
+	y = 10;
+	vertSpeed = 0;
+	horizSpeed = 0;
 	isFly = true;
 }
 
+void Mario::jump() {
+	if (!isFly) {
+		vertSpeed = -1;
+		isFly = true;
+	}
+}
+
 void Mario::gravity() {
-	isFly = true;
 	vertSpeed += 0.05;
-	setPosition(x, y + vertSpeed);
 }
 
 void Mario::death() {
@@ -44,4 +52,67 @@ void Mario:setVertSpeed(float speed) {
 
 void Mario::setIsFly(bool fly) {
 	isFly = fly;
+}
+
+void Mario::vertMovement(Level& level) {
+	isFly = true;
+	vertSpeed += 0.05;
+	setPosition(x, y + vertSpeed);
+	
+	Brick* brick = level.getBrick();
+	int brickCount = level.getBrickCount();
+	
+	for (int i = 0; i < brickCount; i++) {
+		if (isCollision(brick[i])) {
+			if (vertSpeed > 0) {
+				isFly = false;
+			}
+			y = vertSpeed;
+			vertSpeed = 0;
+		}	
+	}	
+}
+
+void Mario::moveLeft(Level& level) {
+	x -= 1;
+	Brick* brick = level.getBrick();
+	int brickCount = level.getBrickCount();
+	
+	for (int i = 0; i < brickCount; i++) {
+		if (isCollision(brick[i])) {
+			x += 1;
+			return;
+		}
+	}
+}
+
+void Mario::moveRight(Level& level) {
+	x += 1;
+	Brick* brick = level.getBrick();
+	int brickCount = level.getBrickCount();
+	
+	for (int i = 0; i < brickCount; i++) {
+		if (isCollision(brick[i])) {
+			x -= 1;
+			return;
+		}
+	}
+}
+
+bool Mario::enemyCollision(Enemy* enemy) {
+	return isCollision(*enemy);
+}
+
+bool Mario::coinCollision(Coin* coin) {
+	return isCollision(*coin);
+}
+
+bool Mario::upEnemyCollision(Enemy* enemy) {
+	if (isCollision(*enemy)) {
+		return isFly == true && vertSpeed > 0 && y + height < enemy.y() + enemy.getHeight() * 0.5;
+	}
+}
+
+void Mario::update() {
+	gravity();
 }

@@ -10,8 +10,10 @@ namespace ule {
 			bool isFly;
 			char type;
 		public:
-			Object(float width, float height, float vertSpeed, float horizSpeed, char type);
+			Object();
 			virtual ~Object() = default;
+			
+			void init(float x, float y, float width, float height, char type);
 			
 			float x();
 			void setX(float newX);
@@ -25,12 +27,18 @@ namespace ule {
 			float getHeight();
 			void setHeight(float newHeight);
 			
+			float getVertSpeed();
+			void setVertSpeed(float speed);
+			
+			float getHoriztSpeed();
+			void setHorizSpeed(float speed);
+			
 			char getType();
+			void setType(char newType);
 			
 			void setPosition(float x, float y);
 			bool isCollision(Object& other);
 			
-			//virtual void update() {}
-			///virtual void draw(Show& showing);
+			virtual void update() {}
 	};
 }

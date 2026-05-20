@@ -1,19 +1,29 @@
 #pragma once
 #include "object.hpp"
+#include "brick.hpp"
+#include "coin.hpp"
+#include "enemy.hpp"
 
 namespace ule {
 	class Mario : public Object {
 		public:
 			Mario();
-			Mario::~Mario() = default;
+			~Mario() = default;
+			
+			void spawn();
 			
 			void jump();
 			void gravity();
 			void death();
 			
-			bool isFly();
+			void vertMovement(Brick* bricks, int brickCount);
+			void moveLeft(Brick* bricks, int brickCount);
+			void moveRight(Brick* bricks, int brickCount);
 			
-			void setVertSpeed(float speed);
-			void setIsFly(bool fly);
+			bool enemyCollision(Enemy* enemy);
+			bool coinCollision(Coin* coin);
+			bool upEnemyCollision(Enemy* enemy);
+			
+			void update() override;
 		};
 }
