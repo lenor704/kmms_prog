@@ -62,6 +62,18 @@ char Object::getType() {
 void Object::setPositon(float x, float y) : x(x), y(y) {
 }
 
+bool Object::getIsActive() {
+	return isActive;
+}
+
+void Object::setIsActive(bool active) {
+	isActive = active;
+}
+
+void Object::deactivate() {
+	isActive = false;
+}
+
 bool Object::isCollision(Object& other) {
 		return x + width > other.x() && x < other.x() + other.getWidth() &&
 		   y + height > other.y() && y < other.y() + other.getHeight();

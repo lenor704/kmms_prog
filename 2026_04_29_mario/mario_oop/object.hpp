@@ -8,6 +8,7 @@ namespace ule {
 			float vertSpeed;
 			float horizSpeed;
 			bool isFly;
+			bool isActive;
 			char type;
 		public:
 			Object();
@@ -38,6 +39,11 @@ namespace ule {
 			
 			void setPosition(float x, float y);
 			bool isCollision(Object& other);
+			
+			bool getIsActive();
+			void setIsActive(bool active);
+			
+			void deactivate();
 			
 			virtual void update() {}
 	};
