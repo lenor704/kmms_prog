@@ -47,3 +47,15 @@ void Brick::toEmpty() {
 	brickType = BrickType::EMPTY_BOX;
 	type = '-';
 }
+
+BrickType Brick::getType() {
+	return brickType;
+}
+
+bool Brick::isFinish() {
+	return brickType == BrickType::NEXT_LVL;
+}
+
+bool Brick::getWasHit() {
+	return wasHit;
+}
