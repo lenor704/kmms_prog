@@ -1,5 +1,7 @@
 #include "coin.h"
 
+using namespace ule::Coin;
+
 Coin::Coin() : GameObject() {
     width = 3;
     height = 2;
