@@ -32,67 +32,82 @@ void Level::clear() {
 void Level::load(int number) {
     clear();
     level = number;
+	int i;
     
-    switch (number) {
+    switch (level) {
         case 1:
-            addBrick(20, 20, 40, 5, BrickType::BRICK);
-			addBrick(30, 10, 5, 3, BrickType::MISTERY_BOX);
-			addBrick(50, 10, 5, 3, BrickType::MISTERY_BOX);
-			addBrick(60, 15, 40, 10, BrickType::BRICK);
-			addBrick(60, 5, 10, 3, BrickType::EMPTY_BOX);
-			addBrick(70, 5, 5, 3, BrickType::MISTERY_BOX);
-			addBrick(75, 5, 5, 3, BrickType::EMPTY_BOX);
-			addBrick(80, 5, 5, 3, BrickType::MISTERY_BOX);
-			addBrick(85, 5, 10, 3, BrickType::EMPTY_BOX);
-			addBrick(100, 20, 20, 5, BrickType::BRICK);
-			addBrick(120, 15, 10, 10, BrickType::BRICK);
-			addBrick(150, 20, 40, 5, BrickType::BRICK);
-			addBrick(210, 15, 10, 10, BrickType::NEXT_LVL);
+			brickCount = 13;
+			brick = new Brick[brickCount];
 			
-			addEnemy(25, 10);
-			addEnemy(80, 10);
+			i = 0;
+            brick[i++].spawn(20, 20, 40, 5, BrickType::BRICK);
+			brick[i++].spawn(30, 10, 5, 3, BrickType::MISTERY_BOX);
+			brick[i++].spawn(50, 10, 5, 3, BrickType::MISTERY_BOX);
+			brick[i++].spawn(60, 15, 40, 10, BrickType::BRICK);
+			brick[i++].spawn(60, 5, 10, 3, BrickType::EMPTY_BOX);
+			brick[i++].spawn(70, 5, 5, 3, BrickType::MISTERY_BOX);
+			brick[i++].spawn(75, 5, 5, 3, BrickType::EMPTY_BOX);
+			brick[i++].spawn(80, 5, 5, 3, BrickType::MISTERY_BOX);
+			brick[i++].spawn(85, 5, 10, 3, BrickType::EMPTY_BOX);
+			brick[i++].spawn(100, 20, 20, 5, BrickType::BRICK);
+			brick[i++].spawn(120, 15, 10, 10, BrickType::BRICK);
+			brick[i++].spawn(150, 20, 40, 5, BrickType::BRICK);
+			brick[i++].spawn(210, 15, 10, 10, BrickType::NEXT_LVL);
+			
+			enemyCount = 2;
+			enemy = new Enemy[enemyCount];
+			
+			i = 0;
+			enemy[i++].spawn(25, 10);
+			enemy[i++].spawn(80, 10);
             break;
         case 2:
-			addBrick(20, 20, 40, 5, BrickType::BRICK);
-			addBrick(60, 15, 10, 10, BrickType::BRICK);
-			addBrick(80, 20, 20, 5, BrickType::BRICK);
-			addBrick(120, 15, 10, 10, BrickType::BRICK);
-			addBrick(150, 20, 40, 5, BrickType::BRICK);
-			addBrick(210, 15, 10, 10, BrickType::NEXT_LVL);
+			brickCount = 6;
+			brick = new Brick[brickCount];
 			
-			addEnemy(25, 10);
-			addEnemy(80, 10);
-			addEnemy(65, 10);
-			addEnemy(120, 10);
-			addEnemy(160, 10);
-			addEnemy(175, 10);
+			i = 0;
+			brick[i++].spawn(20, 20, 40, 5, BrickType::BRICK);
+			brick[i++].spawn(60, 15, 10, 10, BrickType::BRICK);
+			brick[i++].spawn(80, 20, 20, 5, BrickType::BRICK);
+			brick[i++].spawn(120, 15, 10, 10, BrickType::BRICK);
+			brick[i++].spawn(150, 20, 40, 5, BrickType::BRICK);
+			brick[i++].spawn(210, 15, 10, 10, BrickType::NEXT_LVL);
+			
+			enemyCount = 6;
+			enemy = new Enemy[enemyCount];
+			
+			i = 0;
+			enemy[i++].spawn(25, 10);
+			enemy[i++].spawn(80, 10);
+			enemy[i++].spawn(65, 10);
+			enemy[i++].spawn(120, 10);
+			enemy[i++].spawn(160, 10);
+			enemy[i++].spawn(175, 10);
             break;
         case 3:
-            addBrick(20, 20, 40, 5, BrickType::BRICK);
-			addBrick(80, 20, 15, 5, BrickType::BRICK);
-			addBrick(120, 15, 15, 10, BrickType::BRICK);
-			addBrick(160, 10, 15, 15, BrickType::NEXT_LVL);
+			brickCount = 4;
+			brick = new Brick[brickCount];
+		
+			i = 0;
+            brick[i++].spawn(20, 20, 40, 5, BrickType::BRICK);
+			brick[i++].spawn(80, 20, 15, 5, BrickType::BRICK);
+			brick[i++].spawn(120, 15, 15, 10, BrickType::BRICK);
+			brick[i++].spawn(160, 10, 15, 15, BrickType::NEXT_LVL);
 			
-			addEnemy(25, 10);
-			addEnemy(50, 10);
-			addEnemy(80, 10);
-			addEnemy(90, 10);
-			addEnemy(120, 10);
-			addEnemy(130, 10);
+			enemyCount = 6;
+			enemy = new Enemy[enemyCount];
+			
+			i = 0;
+			enemy[i++].spawn(25, 10);
+			enemy[i++].spawn(50, 10);
+			enemy[i++].spawn(80, 10);
+			enemy[i++].spawn(90, 10);
+			enemy[i++].spawn(120, 10);
+			enemy[i++].spawn(130, 10);
             break;
         default:
             break;
     }
-}
-
-void Level::addBrick(float x, float y, float w, float h, BrickType type) {
-    brick[brickCount].spawn(x, y, w, h, type);
-    brickCount++;
-}
-
-void Level::addEnemy(float x, float y) {
-    enemy[enemyCount].spawn(x, y);
-	enemyCount++;
 }
 
 void Level::update() {
@@ -108,11 +123,6 @@ void Level::update() {
             coin[i].update();
         }
     }
-}
-
-void Level::spawnCoin(float x, float y) {
-    coin[coinCount].spawn(x, y);
-    coinCount++;
 }
 
 void Level::removeEnemy(int index) {

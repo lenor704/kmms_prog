@@ -10,11 +10,13 @@ Enemy::Enemy() : Object(), movingRight(true) {
 	isFly = true;
 	horizSpeed = 0.2;
 	vertSpeed = 0;
+	isActive = false;
 }
 
 void Enemy::spawn(float xPos, float yPos) {
 	x = xPos;
 	y = yPos;
+	isActive = true;
 }
 
 void Enemy::horizonMovement(Brick* brick, int brickCount) {

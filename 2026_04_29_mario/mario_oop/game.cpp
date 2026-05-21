@@ -1,6 +1,7 @@
 #include "game.hpp"
 #include <windows.h>
 
+
 using namespace ule;
 
 Game::Game() {
@@ -14,9 +15,9 @@ Game::~Game() {
 }
 
 void Game::init() {
-    mario.spawn();
-    level.load(1);
     isRunning = true;
+	mario.spawn();
+    level.load(1);
 }
 
 void Game::run() {
@@ -24,7 +25,7 @@ void Game::run() {
         input();
         update();
         show();
-        Sleep(16);
+        Sleep(5);
     }
 }
 

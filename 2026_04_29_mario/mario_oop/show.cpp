@@ -30,13 +30,11 @@ void Show::setCur(int x, int y) {
 }
 
 void Show::clearMap() {
-	for (int i = 0; i < mapWidth; i++) {
-		map[0][i] = ' ';
-	}
-	map[0][mapWidth] = '\0';
-	for (int j = 0; j < mapHeight; j++) {
-		sprintf(map[j], map[0]);
-	}
+	for (int i = 0; i < mapHeight; i++) {
+        for (int j = 0; j < mapWidth; j++) {
+            map[i][j] = ' ';
+        }
+    }
 }
 
 bool Show::isPosInMap(int x, int y) {
