@@ -1,12 +1,12 @@
-#include "coin.h"
+#include "coin.hpp"
 
-using namespace ule::Coin;
+using namespace ule;
 
-Coin::Coin() : GameObject() {
+Coin::Coin() : Object() {
     width = 3;
     height = 2;
     type = '$';
-    vertSpeed = -0.7
+    vertSpeed = -0.7;
     horizSpeed = 0;
     isFly = true;
 }
@@ -14,7 +14,7 @@ Coin::Coin() : GameObject() {
 void Coin::spawn(float xPos, float yPos) {
     x = xPos;
     y = yPos - 3;
-    vertSpeed = -0.7
+    vertSpeed = -0.7;
 }
 
 void Coin::update() {

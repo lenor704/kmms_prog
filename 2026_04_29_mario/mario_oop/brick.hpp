@@ -3,13 +3,13 @@
 
 namespace ule {
 	enum struct BrickType {
-		char MISTERY_BOX = '?',
-		char BRICK = '#',
-		char EMPTY_BOX = '-',
-		char NEXT_LVL = '+',
+		MISTERY_BOX = '?',
+		BRICK = '#',
+		EMPTY_BOX = '-',
+		NEXT_LVL = '+',
 	};
 
-	class Brick : public GameObject {
+	class Brick : public Object {
 		private:
 			BrickType brickType;
 			bool wasHit;

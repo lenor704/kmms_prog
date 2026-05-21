@@ -14,33 +14,36 @@ namespace ule {
 			Object();
 			virtual ~Object() = default;
 			
-			void init(float x, float y, float width, float height, char type);
+			void init(float xPos, float yPos, float w, float h, char newType);
 			
-			float x();
+			float getX() const;
 			void setX(float newX);
 			
-			float y();
+			float getY() const;
 			void setY(float newY);
 			
-			float getWidth();
+			float getWidth() const;
 			void setWidth(float newWidth);
 			
-			float getHeight();
+			float getHeight() const;
 			void setHeight(float newHeight);
 			
-			float getVertSpeed();
+			float getVertSpeed() const;
 			void setVertSpeed(float speed);
 			
-			float getHoriztSpeed();
+			float getHoriztSpeed() const;
 			void setHorizSpeed(float speed);
 			
-			char getType();
+			char getType() const;
 			void setType(char newType);
 			
-			void setPosition(float x, float y);
-			bool isCollision(Object& other);
+			void setPosition(float xPos, float yPos);
+			bool isCollision(const Object& other) const;
 			
-			bool getIsActive();
+			void setIsFly(bool fly);
+			bool getIsFly() const;
+			
+			bool getIsActive() const;
 			void setIsActive(bool active);
 			
 			void deactivate();

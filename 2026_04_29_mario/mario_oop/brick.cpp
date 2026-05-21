@@ -1,14 +1,12 @@
 #include "brick.hpp"
 
-using namespace ule::Brick;
+using namespace ule;
 
-Brick::Brick() : Object(),  {
+Brick::Brick() : Object(), brickType(BrickType::BRICK), wasHit(false) {
 	vertSpeed = 0;
 	horizSpeed = 0;
 	isFly = false;
 	type = '#';
-	brickTtype = BrickType::BRICK;
-	wasHit = false;
 }
 
 void Brick::spawn(float xPos, float yPos, float newWidth, float newHeight, BrickType bType) {
@@ -35,7 +33,7 @@ void Brick::spawn(float xPos, float yPos, float newWidth, float newHeight, Brick
 }
 
 bool Brick::hit() {
-	if (type == BrickType::MISTERY_BOX && !wasHit) {
+	if (brickType == BrickType::MISTERY_BOX && !wasHit) {
 		toEmpty();
 		wasHit = true;
 		return true;

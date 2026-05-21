@@ -1,6 +1,6 @@
 #include "level.hpp"
 
-using namespace ule::Level;
+using namespace ule;
 
 Level::Level() {
 	level = 1;
@@ -31,7 +31,7 @@ void Level::clear() {
 
 void Level::load(int number) {
     clear();
-    levelNumber = number;
+    level = number;
     
     switch (number) {
         case 1:
@@ -98,8 +98,8 @@ void Level::addEnemy(float x, float y) {
 void Level::update() {
     for (int i = 0; i < enemyCount; i++) {
         if (enemy[i].getIsActive()) {
-            enemy[i].vertMovement(bricks, brickCount);
-            enemy[i].horizonMovement(bricks, brickCount);
+            enemy[i].vertMovement(brick, brickCount);
+            enemy[i].horizonMovement(brick, brickCount);
         }
     }
     
@@ -117,7 +117,7 @@ void Level::spawnCoin(float x, float y) {
 
 void Level::removeEnemy(int index) {
     if (index >= 0 && index < enemyCount) {
-        enemiy[index].deactivate();
+        enemy[index].deactivate();
     }
 }
 
@@ -136,7 +136,7 @@ Enemy* Level::getEnemies() {
 }
 
 Coin* Level::getCoins() {
-	return coin
+	return coin;
 }
 			
 int Level::getBrickCount() {

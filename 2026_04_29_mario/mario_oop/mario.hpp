@@ -1,11 +1,14 @@
 #pragma once
 #include "object.hpp"
-#include "brick.hpp"
-#include "coin.hpp"
-#include "enemy.hpp"
 
 namespace ule {
+	class Brick;
+	class Enemy;
+	class Coin;
+	
 	class Mario : public Object {
+		private:
+			bool isAlive;
 		public:
 			Mario();
 			~Mario() = default;
@@ -17,13 +20,14 @@ namespace ule {
 			void death();
 			
 			void vertMovement(Brick* bricks, int brickCount);
-			void moveLeft(Brick* bricks, int brickCount);
-			void moveRight(Brick* bricks, int brickCount);
 			
 			bool enemyCollision(Enemy* enemy);
 			bool coinCollision(Coin* coin);
 			bool upEnemyCollision(Enemy* enemy);
 			
+			bool getIsAlive();
+			void setIsAlive(bool alive);
+			
 			void update() override;
-		};
+	};
 }

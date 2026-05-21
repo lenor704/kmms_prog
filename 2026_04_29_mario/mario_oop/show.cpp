@@ -4,7 +4,7 @@
 #include <cmath>
 #include <cstring>
 
-using namespace ule::Show;
+using namespace ule;
 
 Show::Show() {
 	for (int i = 0; i < mapHeight; i++) {
@@ -12,6 +12,13 @@ Show::Show() {
             map[i][j] = ' ';
         }
         map[i][mapWidth] = '\0';
+    }
+}
+
+void Show::show() {
+    setCur(0, 0);
+    for (int j = 0; j < mapHeight; j++) {
+        std::cout << map[j] << std::endl;
     }
 }
 
@@ -32,20 +39,20 @@ void Show::clearMap() {
 	}
 }
 
-void Show::isPosInMap(int x, int y) {
+bool Show::isPosInMap(int x, int y) {
 	return x >= 0 && x < mapWidth && y >= 0 && y < mapHeight;
 }
 
-void Show::putObjectOnMap(Object& obj) {
-	int ix = round(obj.x());
-	int iy = round(obj.y());
+void Show::putObjectOnMap(const Object& obj) {
+	int ix = round(obj.getX());
+	int iy = round(obj.getY());
 	int iWidth = round(obj.getWidth());
 	int iHeight = round(obj.getHeight());
 	
 	for (int i = ix; i < (ix + iWidth); i++) {
 		for (int j = iy; j < (iy + iHeight); j++) {
 			if (isPosInMap(i, j)){
-				map[j][i] = obj.getType;
+				map[j][i] = obj.getType();
 			}
 		}
 	}

@@ -2,7 +2,7 @@
 #include "object.hpp"
 
 namespace ule{
-	class Coin : public GameObject {
+	class Coin : public Object {
 		public:
 			Coin();
 			~Coin() = default;;

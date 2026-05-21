@@ -1,11 +1,10 @@
 #pragma once
 #include "object.hpp"
+#include "mapSize.hpp"
 
 namespace ule {
 	class Show {
 		private:
-			int mapHeight = 25;
-			int mapWidth = 80;
 			char map[mapHeight][mapWidth];
 			
 			void setCur(int x, int y);			
@@ -14,9 +13,10 @@ namespace ule {
 			Show();
 			~Show() = default;
 			
+			void show();
 			void clearMap();
 			bool isPosInMap(int x, int y);
-			void putObjectOnMap(Object& obj);
+			void putObjectOnMap(const Object& obj);
 			void putScoreOnMap(int score);
 			void showMap();
 	};

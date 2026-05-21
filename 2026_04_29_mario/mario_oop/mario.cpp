@@ -1,17 +1,15 @@
 #include "mario.hpp"
-#include "level.hpp"
+#include "brick.hpp"
+#include "enemy.hpp"
+#include "coin.hpp"
 
-using namespace ule::Mario;
+using namespace ule;
 
-Mario::Mario() : Object() {
-	x = 39;
-	y = 10;
+Mario::Mario() : Object(), isAlive(true) {
 	width = 3;
 	height = 3;
 	type = '@';
-	vertSpeed = 0;
-	horizSpeed = 0;
-	isFly = true;
+	spawn();
 }
 
 void Mario::spawn() {
@@ -20,6 +18,7 @@ void Mario::spawn() {
 	vertSpeed = 0;
 	horizSpeed = 0;
 	isFly = true;
+	isAlive = true;
 }
 
 void Mario::jump() {
@@ -34,27 +33,10 @@ void Mario::gravity() {
 }
 
 void Mario::death() {
-	system("color 4F");
-	Sleep(500);
-	createLevel(level, &mario, 
-				brick, brickLength, 
-				moving, movingLength, 
-				score, maxLvl);     //!!!!!!!!!!!!!!!!!!!
+	isAlive = false;
 }
 
-bool Mario::isFly() {
-	return isFly;
-}
-
-void Mario:setVertSpeed(float speed) {
-	vertSpeed = speed;
-}
-
-void Mario::setIsFly(bool fly) {
-	isFly = fly;
-}
-
-void Mario::vertMovement(Brick* bricks, int brickCount) {
+void Mario::vertMovement(Brick* brick, int brickCount) {
 	isFly = true;
 	vertSpeed += 0.05;
 	setPosition(x, y + vertSpeed);
@@ -69,29 +51,6 @@ void Mario::vertMovement(Brick* bricks, int brickCount) {
 		}	
 	}	
 }
-
-void Mario::moveLeft(Brick* bricks, int brickCount) {
-	x -= 1;
-	
-	for (int i = 0; i < brickCount; i++) {
-		if (isCollision(brick[i])) {
-			x += 1;
-			return;
-		}
-	}
-}
-
-void Mario::moveRight(Brick* bricks, int brickCount) {
-	x += 1;
-	
-	for (int i = 0; i < brickCount; i++) {
-		if (isCollision(brick[i])) {
-			x -= 1;
-			return;
-		}
-	}
-}
-
 bool Mario::enemyCollision(Enemy* enemy) {
 	return isCollision(*enemy);
 }
@@ -102,8 +61,17 @@ bool Mario::coinCollision(Coin* coin) {
 
 bool Mario::upEnemyCollision(Enemy* enemy) {
 	if (isCollision(*enemy)) {
-		return isFly == true && vertSpeed > 0 && y + height < enemy.y() + enemy.getHeight() * 0.5;
+		return isFly == true && vertSpeed > 0 && y + height < enemy->getY() + enemy->getHeight() * 0.5;
 	}
+	return false;
+}
+
+bool Mario::getIsAlive() {
+	return isAlive;
+}
+
+void Mario::setIsAlive(bool alive) {
+	isAlive = alive;
 }
 
 void Mario::update() {

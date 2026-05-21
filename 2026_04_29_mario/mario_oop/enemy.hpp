@@ -2,13 +2,15 @@
 #include "object.hpp"
 
 namespace ule {
+	class Brick;
+	
 	class Enemy : public Object {
 		private:
 			bool movingRight;
 			
 		public:
 			Enemy();
-			~Enemy = default;
+			~Enemy() = default;
 			
 			void spawn(float xPos, float yPos);
 			

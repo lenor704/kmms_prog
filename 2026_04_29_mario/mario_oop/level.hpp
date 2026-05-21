@@ -21,8 +21,9 @@ namespace ule {
 			void addEnemy(float x, float y);
 		public:
 			Level();
-			~Level;
+			~Level();
 			
+			void clear();
 			void load(int number);
 			void update();
 			void spawnCoin(float x, float y);

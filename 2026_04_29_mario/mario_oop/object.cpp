@@ -14,16 +14,15 @@ Object::Object() {
 	
 }
 
-void Object::init(float x, float y, float width, float height, char type)
-	: x(x),
-	y(y),
-	width(width),
-	height(height),
-	type(type)
-{	
+void Object::init(float xPos, float yPos, float w, float h, char newType) {	
+	x = xPos;
+	y = yPos;
+	width = w;
+	height = h;
+	type = newType;
 }
 
-float Object::x() {
+float Object::getX() const {
 	return x;
 }
 
@@ -31,7 +30,7 @@ void Object::setX(float newX) {
 	x = newX;
 }
 
-float Object::y() {
+float Object::getY() const {
 	return y;
 }
 
@@ -39,7 +38,7 @@ void Object::setY(float newY) {
 	y = newY;
 }
 
-float Object::getHeight() {
+float Object::getHeight() const {
 	return height;
 }
 
@@ -47,7 +46,7 @@ void Object::setHeight(float newHeight) {
 	height = newHeight;
 }
 
-float Object::getWidth() {
+float Object::getWidth() const {
 	return width;
 }
 
@@ -55,14 +54,31 @@ void Object::setWidth(float newWidth) {
 	width = newWidth;
 }
 
-char Object::getType() {
+float Object::getVertSpeed() const {
+	return vertSpeed;
+}
+
+void Object::setVertSpeed(float speed) {
+	vertSpeed = speed;
+}
+
+char Object::getType() const {
 	return type;
 }
 
-void Object::setPositon(float x, float y) : x(x), y(y) {
+void Object::setPosition(float xPos, float yPos) {
+	x = xPos;
+	y = yPos;
 }
 
-bool Object::getIsActive() {
+void Object::setIsFly(bool fly) {
+	isFly = fly;
+}
+bool Object::getIsFly() const {
+	return isFly;
+}
+
+bool Object::getIsActive() const {
 	return isActive;
 }
 
@@ -74,11 +90,8 @@ void Object::deactivate() {
 	isActive = false;
 }
 
-bool Object::isCollision(Object& other) {
-		return x + width > other.x() && x < other.x() + other.getWidth() &&
-		   y + height > other.y() && y < other.y() + other.getHeight();
+bool Object::isCollision(const Object& other) const {
+		return x + width > other.getX() && x < other.getX() + other.getWidth() &&
+		   y + height > other.getY() && y < other.getY() + other.getHeight();
 }
 
-void Object::draw(Show& showing) {
-	showing.drawObject(*this);
-}
