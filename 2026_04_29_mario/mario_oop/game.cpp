@@ -22,7 +22,7 @@ void Game::init() {
 
 void Game::run() {
     while (isRunning) {
-        input();
+		input();
         update();
         show();
         Sleep(5);
@@ -41,6 +41,9 @@ void Game::input() {
 	}
 	if (GetKeyState('D') < 0) {
 		moveHorizonMap(-1);
+	}
+	if (mario.getY() > mapHeight) {
+		mario.death();
 	}
 }
 
@@ -83,6 +86,8 @@ void Game::update() {
     if (!mario.getIsAlive()) {
         system("color 4F");
         Sleep(500);
+		level.load(levelNumber);
+		mario.spawn();
     }
 }
 

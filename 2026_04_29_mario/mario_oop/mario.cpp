@@ -19,6 +19,7 @@ void Mario::spawn() {
 	horizSpeed = 0;
 	isFly = true;
 	isAlive = true;
+	isActive = true;
 }
 
 void Mario::jump() {
@@ -46,9 +47,9 @@ void Mario::vertMovement(Brick* brick, int brickCount) {
 			if (vertSpeed > 0) {
 				isFly = false;
 			}
-			y = vertSpeed;
+			y -= vertSpeed;
 			vertSpeed = 0;
-		}	
+		} 	
 	}	
 }
 bool Mario::enemyCollision(Enemy* enemy) {

@@ -16,6 +16,7 @@ void Brick::spawn(float xPos, float yPos, float newWidth, float newHeight, Brick
 	height = newHeight;
 	brickType = bType;
 	isActive = true;
+	wasHit = false;
 	
 	switch (brickType) {
         case BrickType::BRICK:

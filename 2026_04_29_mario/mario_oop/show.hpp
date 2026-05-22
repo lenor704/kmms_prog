@@ -5,7 +5,7 @@
 namespace ule {
 	class Show {
 		private:
-			char map[mapHeight][mapWidth];
+			char map[mapHeight][mapWidth + 1];
 			
 			void setCur(int x, int y);			
 

@@ -18,7 +18,7 @@ Show::Show() {
 void Show::show() {
     setCur(0, 0);
     for (int j = 0; j < mapHeight; j++) {
-        std::cout << map[j] << std::endl;
+        std::cout << map[j] << '\n';
     }
 }
 
@@ -42,6 +42,10 @@ bool Show::isPosInMap(int x, int y) {
 }
 
 void Show::putObjectOnMap(const Object& obj) {
+	if (!obj.getIsActive()) {
+        return;
+    }
+	
 	int ix = round(obj.getX());
 	int iy = round(obj.getY());
 	int iWidth = round(obj.getWidth());
@@ -65,9 +69,9 @@ void Show::putScoreOnMap(int score) {
 	}
 }
 
-void Show::showMap() {
+/*void Show::showMap() {
     map[mapHeight - 1][mapWidth - 1] = '\0';
 	for (int j = 0; j < mapHeight; j++) {
 		std::cout << map[j];
 	}
-}
+}*/

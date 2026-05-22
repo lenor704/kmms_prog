@@ -3,6 +3,7 @@
 #include "brick.hpp"
 #include "enemy.hpp"
 #include "coin.hpp"
+#include <iostream>
 
 namespace ule {
 	class Level {

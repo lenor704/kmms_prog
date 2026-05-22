@@ -3,13 +3,14 @@
 using ule::Object;
 
 Object::Object() {
-	x = 0;
-	y = 0;
+	x = -1000;
+	y = -1000;
 	width = 0;
 	height = 0;
 	vertSpeed = 0;
 	horizSpeed = 0;
 	isFly = true;
+	isActive = false;
 	type = ' ';
 	
 }

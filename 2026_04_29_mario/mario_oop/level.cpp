@@ -7,21 +7,30 @@ Level::Level() {
 	brickCount = 0;
 	enemyCount = 0;
 	coinCount = 0;
+	
+	brick = nullptr;
+    enemy = nullptr;
+    coin = nullptr;
 }
 
 Level::~Level() {
 	clear();
 }
 
-void Level::clear() {
-    for (int i = 0; i < brickCount; i++) {
-        brick[i].deactivate();
+void Level::clear() {	
+    if (brick != nullptr) {
+        delete[] brick;
+        brick = nullptr;
     }
-    for (int i = 0; i < enemyCount; i++) {
-        enemy[i].deactivate();
+    
+    if (enemy != nullptr) {
+        delete[] enemy;
+        enemy = nullptr;
     }
-    for (int i = 0; i < coinCount; i++) {
-        coin[i].deactivate();
+    
+    if (coin != nullptr) {
+        delete[] coin;
+        coin = nullptr;
     }
     
     brickCount = 0;
@@ -36,6 +45,7 @@ void Level::load(int number) {
     
     switch (level) {
         case 1:
+			system("color 9F");
 			brickCount = 13;
 			brick = new Brick[brickCount];
 			
@@ -60,8 +70,12 @@ void Level::load(int number) {
 			i = 0;
 			enemy[i++].spawn(25, 10);
 			enemy[i++].spawn(80, 10);
+			
+			coinCount = 0;
+            coin = nullptr;
             break;
         case 2:
+			system("color 4F");
 			brickCount = 6;
 			brick = new Brick[brickCount];
 			
@@ -83,8 +97,12 @@ void Level::load(int number) {
 			enemy[i++].spawn(120, 10);
 			enemy[i++].spawn(160, 10);
 			enemy[i++].spawn(175, 10);
+			
+			coinCount = 0;
+            coin = nullptr;
             break;
         case 3:
+			system("color 4F");
 			brickCount = 4;
 			brick = new Brick[brickCount];
 		
@@ -104,6 +122,9 @@ void Level::load(int number) {
 			enemy[i++].spawn(90, 10);
 			enemy[i++].spawn(120, 10);
 			enemy[i++].spawn(130, 10);
+			
+			coinCount = 0;
+            coin = nullptr;
             break;
         default:
             break;

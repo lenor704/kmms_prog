@@ -10,7 +10,6 @@ Enemy::Enemy() : Object(), movingRight(true) {
 	isFly = true;
 	horizSpeed = 0.2;
 	vertSpeed = 0;
-	isActive = false;
 }
 
 void Enemy::spawn(float xPos, float yPos) {

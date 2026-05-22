@@ -9,7 +9,6 @@ Coin::Coin() : Object() {
     vertSpeed = -0.7;
     horizSpeed = 0;
     isFly = true;
-	isActive = false;
 }
 
 void Coin::spawn(float xPos, float yPos) {
