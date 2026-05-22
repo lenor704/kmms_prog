@@ -3,9 +3,10 @@
 #include "enemy.hpp"
 #include "coin.hpp"
 
+
 using namespace ule;
 
-Mario::Mario() : Object(), isAlive(true) {
+Mario::Mario() : Object(), isAlive(true), hitBrickFromBelow(-1), reachedFinish(false) {
 	width = 3;
 	height = 3;
 	type = '@';
@@ -13,6 +14,7 @@ Mario::Mario() : Object(), isAlive(true) {
 }
 
 void Mario::spawn() {
+	prevY = y;
 	x = 39;
 	y = 10;
 	vertSpeed = 0;
@@ -20,13 +22,13 @@ void Mario::spawn() {
 	isFly = true;
 	isAlive = true;
 	isActive = true;
+	hitBrickFromBelow = -1;
+    reachedFinish = false;
 }
 
 void Mario::jump() {
-	if (!isFly) {
-		vertSpeed = -1;
-		isFly = true;
-	}
+	vertSpeed = -1.5;
+	isFly = true;
 }
 
 void Mario::gravity() {
@@ -38,20 +40,30 @@ void Mario::death() {
 }
 
 void Mario::vertMovement(Brick* brick, int brickCount) {
-	isFly = true;
-	vertSpeed += 0.05;
-	setPosition(x, y + vertSpeed);
-	
-	for (int i = 0; i < brickCount; i++) {
-		if (isCollision(brick[i])) {
-			if (vertSpeed > 0) {
-				isFly = false;
-			}
-			y -= vertSpeed;
-			vertSpeed = 0;
-		} 	
-	}	
+	prevY = y;
+    isFly = true;
+    vertSpeed += 0.05;
+	hitBrickFromBelow = -1;
+	reachedFinish = false;
+    setPosition(x, y + vertSpeed);
+    
+    for (int i = 0; i < brickCount; i++) {
+        if (isCollision(brick[i])) {
+            if (vertSpeed > 0) {
+                isFly = false;
+            } else if (vertSpeed < 0) {
+                hitBrickFromBelow = i;
+            }
+			if (brick[i].isFinish()) {
+                reachedFinish = true;
+            }
+            y -= vertSpeed;
+            vertSpeed = 0;
+			break;
+		}
+	}
 }
+
 bool Mario::enemyCollision(Enemy* enemy) {
 	return isCollision(*enemy);
 }
@@ -69,6 +81,18 @@ bool Mario::upEnemyCollision(Enemy* enemy) {
 
 bool Mario::getIsAlive() {
 	return isAlive;
+}
+
+float Mario::getPrevY() {
+	return prevY;
+}
+
+int Mario::getHitBrickFromBelow() {
+    return hitBrickFromBelow;
+}
+
+bool Mario::getReachedFinish() {
+    return reachedFinish;
 }
 
 void Mario::setIsAlive(bool alive) {

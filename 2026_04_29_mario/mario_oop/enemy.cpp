@@ -29,12 +29,13 @@ void Enemy::horizonMovement(Brick* brick, int brickCount) {
 		}
 	}
 	
-	Object tmp;
-	tmp.init(movingRight ? (x + 1) : (x - 1), y, 1, 1, ' ');
-	if (tmp.getIsFly() == true) {
-		x -= horizSpeed;
-		horizSpeed = -horizSpeed;
-	}
+	Enemy tmp = *this;
+    tmp.vertMovement(brick, brickCount);
+    
+    if (tmp.isFly == true) {
+        x -= horizSpeed;
+        horizSpeed = -horizSpeed;
+    }
 }
 
 void Enemy::vertMovement(Brick* brick, int brickCount) {

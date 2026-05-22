@@ -9,6 +9,9 @@ namespace ule {
 	class Mario : public Object {
 		private:
 			bool isAlive;
+			float prevY;
+			int hitBrickFromBelow;
+            bool reachedFinish;
 		public:
 			Mario();
 			~Mario() = default;
@@ -26,6 +29,10 @@ namespace ule {
 			bool upEnemyCollision(Enemy* enemy);
 			
 			bool getIsAlive();
+			float getPrevY();
+			int getHitBrickFromBelow();
+            bool getReachedFinish();
+			
 			void setIsAlive(bool alive);
 			
 			void update() override;

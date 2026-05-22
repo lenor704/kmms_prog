@@ -17,6 +17,8 @@ namespace ule {
 			int brickCount;
             int enemyCount;
             int coinCount;
+			
+			int coinSpawned;
 		public:
 			Level();
 			~Level();
@@ -26,6 +28,8 @@ namespace ule {
 			void update();
 			void removeEnemy(int index);
 			void removeCoin(int index);
+			
+			void spawnCoin(float x, float y);
 			
 			Brick* getBricks();
 			Enemy* getEnemies();

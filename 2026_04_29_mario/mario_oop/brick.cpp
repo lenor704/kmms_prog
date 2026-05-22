@@ -52,6 +52,24 @@ BrickType Brick::getType() {
 	return brickType;
 }
 
+void Brick::setType(BrickType newType) {
+	brickType = newType;
+	switch (brickType) {
+        case BrickType::BRICK:
+            type = '#';
+            break;
+        case BrickType::MISTERY_BOX:
+            type = '?';
+            break;
+        case BrickType::EMPTY_BOX:
+            type = '-';
+            break;
+        case BrickType::NEXT_LVL:
+            type = '+';
+            break;
+    }
+}
+
 bool Brick::isFinish() {
 	return brickType == BrickType::NEXT_LVL;
 }

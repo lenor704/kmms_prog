@@ -79,6 +79,20 @@ void Game::moveHorizonMap(float dx) {
 void Game::update() {
     mario.update();
     mario.vertMovement(level.getBricks(), level.getBrickCount());
+	
+	if (mario.getReachedFinish()) {
+        nextLevel();
+        return;
+    }
+    
+    int hitIndex = mario.getHitBrickFromBelow();
+    if (hitIndex >= 0) {
+        Brick* bricks = level.getBricks();
+        if (bricks[hitIndex].getType() == BrickType::MISTERY_BOX) {
+            bricks[hitIndex].setType(BrickType::EMPTY_BOX);
+            level.spawnCoin(bricks[hitIndex].getX(), bricks[hitIndex].getY());
+        }
+    }
     
     level.update();
     handleCollisions();
@@ -86,20 +100,20 @@ void Game::update() {
     if (!mario.getIsAlive()) {
         system("color 4F");
         Sleep(500);
-		level.load(levelNumber);
-		mario.spawn();
+        level.load(levelNumber);
+        mario.spawn();
+        score = 0;
     }
 }
 
 void Game::handleCollisions() {
     Enemy* enemy = level.getEnemies();
     for (int i = 0; i < level.getEnemyCount(); i++) {
-        //if (!enemy[i].getIsActive()) continue;
+        if (!enemy[i].getIsActive()) continue;
         
         if (mario.upEnemyCollision(&enemy[i])) {
             score += 50;
             level.removeEnemy(i);
-            mario.setVertSpeed(-0.3); //!!!!!!!!!!!!
         } else if (mario.enemyCollision(&enemy[i])) {
             mario.death();
             return;
@@ -108,21 +122,11 @@ void Game::handleCollisions() {
     
     Coin* coin = level.getCoins();
     for (int i = 0; i < level.getCoinCount(); i++) {
-        //if (!coin[i].getIsActive()) continue;
+        if (!coin[i].getIsActive()) continue;
         
         if (mario.coinCollision(&coin[i])) {
             score += 100;
             level.removeCoin(i);
-        }
-    }
-    
-    Brick* brick = level.getBricks();
-    for (int i = 0; i < level.getBrickCount(); i++) {
-        //if (!brick[i].getIsActive()) continue;
-        
-        if (brick[i].isFinish() && mario.isCollision(brick[i])) {
-            nextLevel();
-            return;
         }
     }
 }
@@ -168,7 +172,6 @@ void Game::nextLevel() {
     
     level.load(levelNumber);
     mario.spawn();
-    
-    system("color 9F");
+	score = 0;
 }
 

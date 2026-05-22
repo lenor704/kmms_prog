@@ -39,13 +39,14 @@ void Level::clear() {
 }
 
 void Level::load(int number) {
+	system("color 9F");
     clear();
     level = number;
+	coinSpawned = 0;
 	int i;
     
     switch (level) {
         case 1:
-			system("color 9F");
 			brickCount = 13;
 			brick = new Brick[brickCount];
 			
@@ -71,11 +72,10 @@ void Level::load(int number) {
 			enemy[i++].spawn(25, 10);
 			enemy[i++].spawn(80, 10);
 			
-			coinCount = 0;
-            coin = nullptr;
+			coinCount = 4;
+            coin = new Coin[coinCount];
             break;
         case 2:
-			system("color 4F");
 			brickCount = 6;
 			brick = new Brick[brickCount];
 			
@@ -102,7 +102,6 @@ void Level::load(int number) {
             coin = nullptr;
             break;
         case 3:
-			system("color 4F");
 			brickCount = 4;
 			brick = new Brick[brickCount];
 		
@@ -141,8 +140,16 @@ void Level::update() {
     
     for (int i = 0; i < coinCount; i++) {
         if (coin[i].getIsActive()) {
-            coin[i].update();
+            coin[i].vertMovement(brick, brickCount);
+            coin[i].horizonMovement(brick, brickCount);
         }
+    }
+}
+
+void Level::spawnCoin(float x, float y) {
+    if (coinSpawned < coinCount) {
+        coin[coinSpawned].spawn(x, y);
+        coinSpawned++;
     }
 }
 

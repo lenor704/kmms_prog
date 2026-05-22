@@ -23,6 +23,7 @@ namespace ule {
 			void toEmpty();
 			
 			BrickType getType();
+			void setType(BrickType newType);
 			bool isFinish();
 			bool getWasHit();
 	};
