@@ -68,10 +68,3 @@ void Show::putScoreOnMap(int score) {
 		map[1][i + 5] = c[i];
 	}
 }
-
-/*void Show::showMap() {
-    map[mapHeight - 1][mapWidth - 1] = '\0';
-	for (int j = 0; j < mapHeight; j++) {
-		std::cout << map[j];
-	}
-}*/

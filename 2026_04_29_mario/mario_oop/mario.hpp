@@ -1,5 +1,8 @@
 #pragma once
 #include "object.hpp"
+#include "brick.hpp"
+#include "enemy.hpp"
+#include "coin.hpp"
 
 namespace ule {
 	class Brick;

@@ -1,8 +1,4 @@
 #include "mario.hpp"
-#include "brick.hpp"
-#include "enemy.hpp"
-#include "coin.hpp"
-
 
 using namespace ule;
 

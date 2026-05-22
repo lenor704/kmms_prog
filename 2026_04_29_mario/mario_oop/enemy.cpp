@@ -1,5 +1,4 @@
 #include "enemy.hpp"
-#include "brick.hpp"
 
 using namespace ule;
 
