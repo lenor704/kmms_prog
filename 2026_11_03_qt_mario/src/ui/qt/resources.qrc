@@ -1,0 +1,14 @@
+<RCC>
+	<qresource prefix="/">
+		<file alias="sprites/mario.png">sprites/mario.png</file>
+		<file alias="sprites/goomba.png">sprites/goomba.png</file>
+		<file alias="sprites/fly_enemy.png">sprites/fly_enemy.png</file>
+		<file alias="sprites/jump_enemy.png">sprites/jump_enemy.png</file>
+		<file alias="sprites/coin.png">sprites/coin.png</file>
+		<file alias="sprites/brick.png">sprites/brick.png</file>
+		<file alias="sprites/mystery_block.png">sprites/mystery_block.png</file>
+		<file alias="sprites/empty_block.png">sprites/empty_block.png</file>
+		<file alias="sprites/moving_platform.png">sprites/moving_platform.png</file>
+		<file alias="sprites/background.png">sprites/background.png</file>
+	</qresource>
+</RCC>
