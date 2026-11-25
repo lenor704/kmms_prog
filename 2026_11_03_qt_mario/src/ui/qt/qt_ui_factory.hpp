@@ -1,5 +1,6 @@
 #pragma once
 
+#include "game_window.hpp"
 #include "qt_box.hpp"
 #include "qt_enemy.hpp"
 #include "qt_fly_enemy.hpp"
@@ -16,6 +17,8 @@ namespace biv {
 	class QtUIFactory : public UIFactory {
 		private:
 			QtGameMap* game_map = nullptr;
+			QtKeyBoard* keyboard = nullptr;
+			GameWindow* window = nullptr;
 			int map_height = 0;
 			int map_width = 0;
 			std::vector<QtBox*> boxes;
@@ -29,7 +32,7 @@ namespace biv {
 			std::vector<QtMovingPlatform*> moving_platforms;
 
 		public:
-			QtUIFactory(Game* game);
+			QtUIFactory(Game* game, QtKeyBoard* keyboard);
 			
 			void clear_data() override;
 			void create_box(

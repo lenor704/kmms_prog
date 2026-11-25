@@ -2,7 +2,8 @@
 
 using biv::QtUIFactory;
 
-QtUIFactory::QtUIFactory(Game* game) : UIFactory(game) {}
+QtUIFactory::QtUIFactory(Game* game, QtKeyBoard* keyboard)
+: UIFactory(game), keyboard(keyboard) {}
 
 void QtUIFactory::clear_data() {
 	game->remove_objs();
@@ -138,6 +139,8 @@ biv::GameMap* QtUIFactory::get_game_map(const int height, const int width) {
 
 	if (game_map == nullptr) {
 		game_map = new QtGameMap(height, width);
+		window = new GameWindow(keyboard, game_map);
+		window->show();
 	}
 	return game_map;
 }

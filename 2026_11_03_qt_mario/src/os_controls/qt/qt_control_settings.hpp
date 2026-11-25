@@ -6,6 +6,7 @@ namespace biv {
 	class QtControlSettings : public OSControlSettings {
 		public:
 			void init() override;
+			void process_events() override;
 			void set_cursor_start_position() override;
 	};
 }

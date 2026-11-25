@@ -13,6 +13,7 @@ target_sources(${PROJECT_NAME}
 		qt_ui_obj_rect_adapter.hpp
 		scene_frame.hpp
 		resources.qrc
+
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
