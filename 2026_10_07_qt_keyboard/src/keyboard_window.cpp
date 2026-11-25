@@ -44,9 +44,9 @@ void KeyBoardWindow::keyPressEvent(QKeyEvent* event) {
 }
 
 void KeyBoardWindow::process_key(const int code) {
-	if (code == 8) { //backspace
+	if (code == 8) { 
 		typed_text.chop(1);
-	} else if (code == 32) { //space
+	} else if (code == 32) { 
 		typed_text += " ";
 	} else if (keyboard->is_key_allowed(code)) {
 		typed_text += keyboard->get_key_text(code);
